@@ -1,5 +1,5 @@
 import datetime
-from . import connection as cn
+from .utils import connection as cn
 from . import thought as tht
 
 

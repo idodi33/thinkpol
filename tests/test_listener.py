@@ -3,7 +3,7 @@ import time
 
 import pytest
 
-from ..listener import Listener
+from thinkpol.utils.listener import Listener
 
 
 _PORT = 1234

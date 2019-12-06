@@ -12,7 +12,7 @@ import time
 
 import pytest
 
-from .. import server
+from thinkpol import server
 
 
 _SERVER_ADDRESS = '127.0.0.1', 5000

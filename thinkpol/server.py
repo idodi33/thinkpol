@@ -3,7 +3,7 @@ import struct
 import threading
 import pathlib
 import os
-from . import listener as lsn
+from .utils import listener as lsn
 
 
 def run_server(address, data):
