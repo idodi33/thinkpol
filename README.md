@@ -1,6 +1,5 @@
 # Thinkpol
-My final project in the course 'Advanced System Design'.
-Full documentation here: 
+My final project in the course 'Advanced System Design'. See [full documentation](https://thinkpol.readthedocs.io/en/latest/?).
 
 ## Installation
 
