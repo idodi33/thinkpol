@@ -1,9 +1,17 @@
 import time
+from datetime import datetime
 import struct
 import threading
 import pathlib
 import os
+import json
+from PIL import Image
 from .utils import listener as lsn
+from .utils import protocol
+from .utils import snapshot as snp
+
+
+parsers = dict()
 
 
 def run_server(address, data):
@@ -19,6 +27,39 @@ def run_server(address, data):
             handler.start()
 
 
+def parser(field):
+    def decorator(f):
+        parsers[field] = f
+        return f
+    return decorator
+
+
+@parser('translation')
+def parse_translation(context, snapshot):
+    datetime_obj = datetime.fromtimestamp(snapshot.datetime / 1000)
+    formatted_time = datetime.strftime(datetime_obj, "%Y-%m-%d_%H-%M-%S-%f")
+    file_path = context.get_file_path(formatted_time, 'translation.json')
+    x, y, z = snapshot.translation
+    data_dict = {"x": x, "y": y, "z": z}
+    with open(file_path, 'w') as f:
+        js = json.dumps(data_dict)
+        print(js)
+        f.write(js)
+
+
+@parser('color_image')
+def parse_color_image(context, snapshot):
+    datetime_obj = datetime.fromtimestamp(snapshot.datetime / 1000)
+    formatted_time = datetime.strftime( datetime_obj, "%Y-%m-%d_%H-%M-%S-%f")
+    file_path = context.get_file_path(formatted_time, 'color_image.jpg')
+    data = snapshot.color_image.data
+    data_len = snapshot.color_image.size
+    rgb_triplets = [(data[i], data[i + 1], data[i + 2]) for i in range(0, data_len, 3)]
+    image = Image.new("RGB", (snapshot.c_width, snapshot.c_height))
+    image.putdata(rgb_triplets)
+    image.save(file_path)
+
+
 class Handler(threading.Thread):
     lock = threading.Lock()
 
@@ -31,54 +72,41 @@ class Handler(threading.Thread):
         """
         Handles one client's request and opens/edits a corresponding file.
         """
-        msg = self.connection.receive(1024)
-
-        user_id, formatted_time, thought = self.parse_message(msg)
-        dir_address = os.path.join(self.data_dir, str(user_id))
-        time_with_end = formatted_time + ".txt"
-        file_address = os.path.join(self.data_dir, str(user_id), time_with_end)
-        print("file address: {0}".format(file_address))
-        dir_path = pathlib.Path(dir_address)
-        file_path = pathlib.Path(file_address)
-        self.lock.acquire()
-        if not dir_path.is_dir():
-            # If the directory or its parent directories don't exist,
-            # they are generated.
-            dir_path.mkdir(parents=True)
-        if not file_path.is_file():
-            file_path.touch()
-            print(file_path.is_file())
-            print("Made file {0}".format(file_path))
-        # Write the thought to the file in append mode
-        # so that you don't run over previous lines.
-        with file_path.open("a") as f:
-            if not self.file_is_empty(file_path):
-                # File is not empty, we need to add a new line.
-                f.write("\n")
-            f.write(thought)
-        self.lock.release()
+        #with Handler.lock:
+        print("meow")
+        hello_msg = self.connection.receive_message()
+        hello = protocol.Hello.deserialize(hello_msg)
+        dir_address = os.path.join(self.data_dir, str(hello.user_id))
+        context = Context(dir_address)
+        config = protocol.Config(["translation", "color_image"])
+        config_msg = config.serialize()
+        self.connection.send_message(config_msg)
+        snapshot_msg = self.connection.receive_message()
+        snapshot = snp.Snapshot.from_bytes(snapshot_msg)
+        parse_translation(context, snapshot)
+        parse_color_image(context, snapshot)
         self.connection.close()
 
-    def parse_message(self, message):
-        """
-        Recieves a message in bytes and converts it
-        into the corresponding id, time and text.
-        """
-        user_id, cur_time, m_size = struct.unpack("QQI", message[:20])
-        thought = message[20:].decode("utf-8")
-        # cur time is converted from seconds since epoch
-        # to a time struct and then to a nice printable format.
-        local_time = time.localtime(cur_time)
-        formatted_time = time.strftime("%Y-%m-%d_%H-%M-%S", local_time)
 
-        if not m_size == len(message[20:]):
-            raise Exception("Incomplete data")
-        print("{0}, {1}, {2}".format(user_id, formatted_time, thought))
-        return user_id, formatted_time, thought
+class Context:
+    lock = threading.Lock()
+    def __init__(self, dir):
+        self.dir = dir
 
-    def file_is_empty(self, path):
+    def get_file_path(self, subdir, file):
         """
-        Recieves a path object that points to a file
-        and returns whether or not it's empty.
+        Constructs a subdirectory  named 'subdir' in self.dir
+        (if it doesn't exist yet).
+        Constructs a file named 'file' in self.dir / subdir
+        (if it doesn't exist yet) and returns it.
         """
-        return os.stat(path).st_size == 0
+        with Context.lock:
+            subdir_pathname = os.path.join(self.dir , subdir)
+            subdir_path = pathlib.Path(subdir_pathname)
+            if not subdir_path.is_dir():
+                subdir_path.mkdir(parents=True)
+            file_pathname = os.path.join(subdir_pathname, file)
+            file_path = pathlib.Path(file_pathname)
+            if not file_path.is_file():
+                file_path.touch()
+            return file_path
