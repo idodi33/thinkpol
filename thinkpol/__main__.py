@@ -1,5 +1,5 @@
 import click
-from . import client as cln
+#from . import client as cln
 from . import server as srv
 from . import web as wb
 from .utils import reader as rdr
@@ -27,7 +27,7 @@ def run(address):
 
 cli.add_command(server)
 
-
+'''
 @click.group()
 def client():
     pass
@@ -41,7 +41,7 @@ def run(file_name, address):
 
 
 cli.add_command(client)
-
+'''
 
 @cli.command('run_webserver')
 @click.argument('address')
@@ -78,6 +78,7 @@ def run_server(address, data):
 
 
 def main(argv):
+    print("main is running")
     no_errors = True
     try:
         cli()

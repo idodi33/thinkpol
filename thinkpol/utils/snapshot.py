@@ -3,7 +3,7 @@ import os
 from PIL import Image
 from datetime import datetime
 import io
-import cortex_pb2
+from ..protobufs import cortex_pb2
 
 
 _SNP_FORMAT = "Snapshot from {0} at {1} on {2} / {3} with a {4}x{5} color \
@@ -57,6 +57,7 @@ class Snapshot:
 		color_image = ImageData("color", c_width, c_height, rgb)
 		d_height, d_width = struct.unpack("II", stream.read(8))
 		depths = read_data(stream, 4 * d_height * d_width)
+		print(f"Size of depth_image data is {len(depths)}")
 		depth_image = ImageData("depth", d_width, d_height, depths)
 		hunger, thirst = struct.unpack("ff", stream.read(8))
 		exhaustion, happiness = struct.unpack("ff", stream.read(8))
@@ -125,7 +126,7 @@ class Snapshot:
 		else:
 			msg += struct.pack("II", 0, 0)
 		if "depth_image" in fields:
-			msg += struct.pack("II", self.d_width, self.d_height)
+			msg += struct.pack("II", self.d_height, self.d_width)
 			msg += self.depth_image.data
 		else:
 			msg += struct.pack("II", 0, 0)
@@ -166,5 +167,5 @@ class ImageData:
 			self.size = width * height * 3
 		else:
 			self.data = data
-			self.size = width * height
+			self.size = width * height * 4
 

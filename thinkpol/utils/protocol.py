@@ -1,7 +1,10 @@
 import struct
 import io
+import protocol_pb2.py
 
 
+
+"""
 class Hello:
 	def __init__(self, user_id, user_name, birth_date, gender):
 		self.user_id = user_id
@@ -54,3 +57,4 @@ class Config:
 			field = encoded_field.decode("utf-8")
 			fields.append(field)
 		return Config(fields)
+"""

@@ -2,7 +2,7 @@ import struct
 import os
 from .snapshot import Snapshot
 from datetime import datetime
-import cortex_pb2
+from ..protobufs import cortex_pb2
 
 _USR_FORMAT = "user {0}: {1}, born {2} ({3})"
 
@@ -11,13 +11,16 @@ def binary_user_info(f):
 	"""
 	Recieves a binary file object and reads user info from it.
 	"""
+	print("started parsing user info")
 	user_id, name_length = struct.unpack("QI", f.read(12))
 	encoded_user_name = f.read(name_length)
+	print("Reading user info some more")
 	user_name = encoded_user_name.decode("utf-8")
 	birth_date = struct.unpack("I", f.read(4))[0]
 	gender_dict = {'m':'male', 'f':'female', 'o': 'other'}
 	gender_char = f.read(1).decode("utf-8")
 	gender = gender_dict[gender_char]
+	print("Readinggg")
 	offset = 17 + name_length
 	return user_id, user_name, birth_date, gender, offset
 
@@ -43,6 +46,7 @@ user_funcs = {'binary': binary_user_info, 'protobuf': protobuf_user_info}
 
 class Reader:
 	def __init__(self, file_name, format):
+		print("Currently reading file")
 		self.format = format
 		with open(file_name, 'rb') as f:
 			for format_name, func in user_funcs.items():
@@ -54,6 +58,7 @@ class Reader:
 			self.user_id, self.user_name, self.birth_date, \
 			self.gender, offset = user_info 
 		self.snapshots_iterator = Reader.iter_snapshots(file_name, offset, format)
+		print("Done with reader init")
 
 	def __str__(self):
 		dttime = datetime.fromtimestamp(self.birth_date)

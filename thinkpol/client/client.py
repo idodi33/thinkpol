@@ -1,14 +1,22 @@
 import datetime
-from .utils import connection as cn
-from . import thought as tht
-from .utils import reader
+from ..utils import connection as cn
+from .. import thought as tht
+from ..utils import reader
 #from .utils import protocol
 import time
-import cortex_pb2
-import config_pb2
+from ..protobufs import cortex_pb2
+from ..protobufs import config_pb2
 
-def upload_snapshots(file_name, address):
-	r = reader.Reader(file_name, 'binary')
+
+def upload_sample(host, port, path):
+	'''
+	Accepts a host address (string), a port (int) and a file name and uploads cognition snapshots
+	from the file to the specified address.
+	'''
+	print("Started upload_sample")
+	address = (host, port)
+	r = reader.Reader(path, 'binary')
+	print("finished reading")
 	'''
 	hello = protocol.Hello(r.user_id, r.user_name, r.birth_date, r.gender)
 	hello_msg = hello.serialize()
@@ -27,13 +35,17 @@ def upload_snapshots(file_name, address):
 	for snapshot in r:
 		time.sleep(0.5)
 		with cn.Connection.connect(ip, int(port)) as connection:
+			print("Started connection")
 			connection.send_message(user_msg)
+			print("Sent user message")
 			config_msg = connection.receive_message()
+			print("Received config message")
 			config = config_pb2.Config()
 			config.ParseFromString(config_msg)
 			#config = protocol.Config.deserialize(config_msg)
 			snapshot_msg = snapshot.serialize_request(config.fields)
 			connection.send_message(snapshot_msg)
+			print(f"fields sent are {config.fields}")
 
 
 def upload_thought(address, user, thought):

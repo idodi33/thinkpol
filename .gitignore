@@ -1,2 +1,7 @@
 .env/
 .pytest_cache/
+.sample.mind.gz/
+.sample.mind/
+.data/
+.raw_data/
+.parsed_data/
