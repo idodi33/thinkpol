@@ -1,12 +1,19 @@
 import json
-from .parser_utils import extract_user_metadata
+from .parser_utils import extract_metadata
 
 
 def parse_pose(snapshot):
-	json_snap = json.loads(snapshot)
-	json_parsed = extract_user_metadata(json_snap)
-	json_parsed['translation'] = json_snap['translation']	# this is a 3-tuple
-	json_parsed['rotation'] = json_snap['rotation']		# this is a 4-tuple
+	js = json.loads(snapshot)
+	json_parsed = extract_metadata(js)
+	(x, y, z) = js['translation']
+	json_parsed['translation_x'] = x
+	json_parsed['translation_y'] = y
+	json_parsed['translation_z'] = z
+	(x, y, z, w) = js['rotation']
+	json_parsed['rotation_x'] = x
+	json_parsed['rotation_y'] = y
+	json_parsed['rotation_z'] = z
+	json_parsed['rotation_w'] = w
 	json_parsed = json.dumps(json_parsed)
 	return json_parsed
 

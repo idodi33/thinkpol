@@ -14,7 +14,7 @@ def cli():
 @click.argument('url')
 def run_parser(field, url):
     consume = parse_url(url)
-    print(consume(parsers[field]))	# print is temporary, should be redirected to saver
+    consume(parsers[field])	# print is temporary, should be redirected to saver
 
 @cli.command('parse')
 @click.argument('field')
@@ -24,15 +24,19 @@ def cli_command_parse(field, file_name):
 		data = f.read()
 	return parse(field, data)
 
+# Here you can add other message queue options.
+mq_options = {'rabbitmq': create_parser_consumer}
+
 def parse_url(url):
 	'''
 	Receives a url that specifies which message queue we should connect to,
 	connects to it and returns a consuming function we can use.
 	'''
 	parsed_url = furl.furl(url)
-	if parsed_url.scheme == 'rabbitmq':
-		return create_parser_consumer(parsed_url.host, parsed_url.port)
-	# Here you can add other message queue options.
+	for option in mq_options:
+		if parsed_url.scheme == option:
+			func = mq_options[option]
+			return func(parsed_url.host, parsed_url.port)
 	else:
 		raise ValueError(f"No driver for message queue type {parsed_url.scheme}")
 

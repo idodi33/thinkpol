@@ -11,14 +11,17 @@ from ..protobufs import config_pb2
 import json
 from ..parsers import parsers
 from datetime import datetime
+import time
+
 
 RAW_DATA_DIR = os.path.join(os.getcwd(), 'raw_data')
+KILLED = False
 
 
 def run_server(host, port, publish):
     print("started run_server")
     with lsn.Listener(int(port), host, 1000, True) as listener:
-        while True:
+        while not KILLED:
             # client is a connection object
             client = listener.accept()
             handler = Handler(client, publish)
@@ -43,7 +46,11 @@ class Handler(threading.Thread):
         hello = protocol.Hello.deserialize(hello_msg)
         dir_address = os.path.join(self.data_dir, str(hello.user_id))
         '''
+        global KILLED
         user_msg = self.connection.receive_message()
+        if user_msg == "kill":
+            KILLED = True
+            return
         user = cortex_pb2.User()
         user.ParseFromString(user_msg)
         #dir_address = os.path.join(self.data_dir, str(user.user_id))
@@ -52,14 +59,16 @@ class Handler(threading.Thread):
         config = protocol.Config(["translation", "color_image"])
         config_msg = config.serialize()
         '''
-        fields_to_parse = fields_from_parsers()
+        fields_to_parse = available_fields()
         config = config_pb2.Config(
-            fields = fields_to_parse
+            fields = parsers.keys()
             )
         config_msg = config.SerializeToString()
         self.connection.send_message(config_msg)
         snapshot_msg = self.connection.receive_message()
         snapshot = snp.Snapshot.from_bytes(snapshot_msg)
+        print(f"Server: type of datetime is {type(snapshot.datetime)}")
+        print(f"Server: datetime is {snapshot.datetime}")
         '''
         for field in fields_to_parse:
             if parsers[field]:
@@ -68,11 +77,13 @@ class Handler(threading.Thread):
                 raise ValueError(f"No parser for {field}.")
         '''
         color_image_path, depth_image_path = save_images(snapshot)
+        gender_dict = {0: "man", 1: "woman", 2: "other"}
+        #print(f"gender_dict[user.gender] is {gender_dict[user.gender]}")
         snapshot_dict = {
             'user_id' : user.user_id,
             'username' : user.username,
             'birthday' : user.birthday,
-            'gender' : user.gender,
+            'gender' : gender_dict[user.gender],
             'datetime' : snapshot.datetime,
             'translation' : snapshot.translation,
             'rotation' : snapshot.rotation,
@@ -93,6 +104,7 @@ class Handler(threading.Thread):
         self.publish(json_data)
         #parse_translation(context, snapshot)
         #parse_color_image(context, snapshot)
+        print("closing connection")
         self.connection.close()
 
 '''An object with common utilities the parsers are likely to need.
@@ -148,7 +160,7 @@ def save_images(snapshot):
     print(f"save_images: size of depth_image.data is {len(snapshot.depth_image.data)}")
     return color_file_path_name, depth_file_path_name
 
-def fields_from_parsers():
+def available_fields():
     '''
     Gets a list of the fields we can currently handle, according
     to which parsers we currently have.
@@ -172,7 +184,7 @@ def filter_dict(snapshot_dict):
     '''
     new_dict = snapshot_dict.copy()
     new_fields = ['user_id', 'username', 'birthday', 'gender', 'datetime']
-    new_fields += fields_from_parsers()
+    new_fields += available_fields()
     for field in snapshot_dict.keys():
         if field not in new_fields:
             del new_dict[field]

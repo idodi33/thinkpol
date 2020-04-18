@@ -15,7 +15,10 @@ def upload_sample(host, port, path):
 	'''
 	print("Started upload_sample")
 	address = (host, port)
-	r = reader.Reader(path, 'binary')
+	if path.endswith('.gz'):
+		r = reader.Reader(path, 'protobuf')
+	else:
+		r = reader.Reader(path, 'binary')
 	print("finished reading")
 	'''
 	hello = protocol.Hello(r.user_id, r.user_name, r.birth_date, r.gender)
@@ -25,7 +28,7 @@ def upload_sample(host, port, path):
 		user_id = r.user_id,
 		username = r.user_name,
 		birthday = r.birth_date,
-		gender = r.gender.upper()
+		gender = r.gender
 		)
 	user_msg = user.SerializeToString()
 	if type(address) == str:

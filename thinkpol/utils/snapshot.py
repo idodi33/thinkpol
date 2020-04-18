@@ -71,7 +71,7 @@ class Snapshot:
 		Initializes a snapshot by reading its data from a protobuf
 		formatted bytes iterator.
 		"""
-		message_len = int.frombytes(stream.read(4))
+		message_len = int.from_bytes(stream.read(4), byteorder="little")
 		snp = cortex_pb2.Snapshot()
 		snp.ParseFromString(stream.read(message_len))
 		datetime = snp.datetime
@@ -85,8 +85,10 @@ class Snapshot:
 			snp.color_image.height, snp.color_image.data)
 		d_width = snp.depth_image.width
 		d_height = snp.depth_image.height
+		depths = struct.pack(f"{len(snp.depth_image.data)}f",
+			*snp.depth_image.data)
 		depth_image = ImageData('depth', snp.depth_image.width,
-			snp.depth_image.height, snp.depth_image.data)
+			snp.depth_image.height, depths)
 		hunger = snp.feelings.hunger
 		thirst = snp.feelings.thirst
 		exhaustion = snp.feelings.exhaustion
@@ -112,6 +114,13 @@ class Snapshot:
 
 	def serialize_request(self, fields):
 		msg = struct.pack("Q", self.datetime)
+		if "pose" in fields:
+			msg += struct.pack("ddd", *self.translation)
+			msg += struct.pack("dddd", *self.rotation)
+		else:
+			msg += struct.pack("ddd", 0, 0, 0)
+			msg += struct.pack("dddd", 0, 0, 0, 0)
+		'''
 		if "translation" in fields:
 			msg += struct.pack("ddd", *self.translation)
 		else:
@@ -120,6 +129,7 @@ class Snapshot:
 			msg += struct.pack("dddd", *self.rotation)
 		else:
 			msg += struct.pack("dddd", 0, 0, 0, 0)
+		'''
 		if "color_image" in fields:
 			msg += struct.pack("II", self.c_height, self.c_width)
 			msg += self.color_image.data
@@ -127,7 +137,8 @@ class Snapshot:
 			msg += struct.pack("II", 0, 0)
 		if "depth_image" in fields:
 			msg += struct.pack("II", self.d_height, self.d_width)
-			msg += self.depth_image.data
+			data = self.depth_image.data[:] # Protobuf lists are very weird :P
+			msg += struct.pack('%sf' % len(data), *data)
 		else:
 			msg += struct.pack("II", 0, 0)
 		if "feelings" in fields:

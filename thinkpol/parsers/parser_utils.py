@@ -33,15 +33,16 @@ def get_file_path(snapshot, type):
 			file_path.touch()
 		return file_path
 
-def extract_user_metadata(json_snap):
+def extract_metadata(json_snap):
 	'''
 	Gets a dictionary with snapshot data and returns a
 	dictionary containing only data about the user.
 	'''
-	user_metadata = {
+	metadata = {
 		'user_id' : json_snap['user_id'],
 		'username' : json_snap['username'],
 		'birthday' : json_snap['birthday'],
-		'gender' : json_snap['gender']
+		'gender' : json_snap['gender'],
+		'datetime' : json_snap['datetime']
 	}
-	return user_metadata
+	return metadata

@@ -14,15 +14,19 @@ def run_server(host, port, url):
 	publish = parse_url(url)
 	return srv.run_server(host, int(port), publish)
 
+# Here you can add other message queue options.
+mq_options = {'rabbitmq': create_server_publisher}
+
 def parse_url(url):
 	'''
 	Receives a url that specifies which message queue we should connect to,
 	connects to it and returns a publishing function that the server can use.
 	'''
 	parsed_url = furl.furl(url)
-	if parsed_url.scheme == 'rabbitmq':
-		return create_server_publisher(parsed_url.host, parsed_url.port)
-	# Here you can add other message queue options.
+	for option in mq_options:
+		if parsed_url.scheme == option:
+			func = mq_options[option]
+			return func(parsed_url.host, parsed_url.port)
 	else:
 		raise ValueError(f"No driver for message queue type {parsed_url.scheme}")
 

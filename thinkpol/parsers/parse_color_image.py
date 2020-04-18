@@ -1,12 +1,12 @@
 from datetime import datetime
 from PIL import Image
 from .parser_utils import get_file_path
-from .parser_utils import extract_user_metadata
+from .parser_utils import extract_metadata
 import json
 import pathlib
 
 
-def parse_color_image(snapshot):
+'''def parse_color_image(snapshot):
 	json_snap = json.loads(snapshot)
 	color_file_path = get_file_path(snapshot, 'color')		# path of the file that will contain the parsed image
 	raw_file_path_name = json_snap['color_image']	# path of the file that contains the raw data
@@ -17,8 +17,20 @@ def parse_color_image(snapshot):
 	image = Image.new("RGB", (json_snap['c_width'], json_snap['c_height']))
 	image.putdata(rgb_triplets)
 	image.save(color_file_path)
-	json_parsed = extract_user_metadata(json_snap)
+	json_parsed = extract_metadata(json_snap)
 	json_parsed['color_image'] = str(color_file_path)
+	json_parsed = json.dumps(json_parsed)	# turns our dictionary into something we can send forward.
+	return json_parsed'''
+
+def parse_color_image(snapshot):
+	js = json.loads(snapshot)
+	path = get_file_path(snapshot, 'color')		# path of the file that will contain the parsed image
+	data = pathlib.Path(js['color_image']).read_bytes()	# raw data we are to parse
+	size = js['c_width'], js['c_height']
+	image = Image.frombytes('RGB', size, data)
+	image.save(path)
+	json_parsed = extract_metadata(js)
+	json_parsed['color_image'] = str(path)
 	json_parsed = json.dumps(json_parsed)	# turns our dictionary into something we can send forward.
 	return json_parsed
 
