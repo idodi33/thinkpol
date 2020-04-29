@@ -66,7 +66,7 @@ def test_server_publisher():
 		print("child here")
 		channel.start_consuming() 
 
-
+'''
 def test_parser_consumer():
 	# simulates server publishing
 	serv_connection = pika.BlockingConnection(
@@ -89,24 +89,20 @@ def test_parser_consumer():
 		queue=mock_parser.field, 
 		on_message_callback=mock_callback_parser)
 	# use processing to close queue when done
-	p = os.fork()
-	if p:	# parent process
+	child = os.fork()
+	if child:	# parent process
 		print("parent here")
-		time.sleep(1)
-		os.kill(p, signal.SIGSTOP)
+		time.sleep(6)
+		os.kill(child, signal.SIGSTOP)
 	else:	# child process
-		print("child here")
-		consume(mock_parser)
-
-	p = os.fork()
-	if p:	# parent process
-		print("parent here 2")
-		time.sleep(1)
-		os.wait()
-	else:	# child process
-		print("child here 2")
-		save_channel.start_consuming()
-
+		grandchild = os.fork()
+		if grandchild:	# child process
+			consume(mock_parser)
+			time.sleep(3)
+			os.wait()
+		else:	# grandchild process
+			save_channel.start_consuming()
+'''
 
 def test_saver_consumer():
 	# simulates parser publishing

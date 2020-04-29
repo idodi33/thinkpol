@@ -87,6 +87,7 @@ class Snapshot:
 		d_height = snp.depth_image.height
 		depths = struct.pack(f"{len(snp.depth_image.data)}f",
 			*snp.depth_image.data)
+		print(f"len of depths is {len(depths)}")
 		depth_image = ImageData('depth', snp.depth_image.width,
 			snp.depth_image.height, depths)
 		hunger = snp.feelings.hunger
@@ -138,7 +139,9 @@ class Snapshot:
 		if "depth_image" in fields:
 			msg += struct.pack("II", self.d_height, self.d_width)
 			data = self.depth_image.data[:] # Protobuf lists are very weird :P
-			msg += struct.pack('%sf' % len(data), *data)
+			print(f"type of self.depth_image.data: {type(self.depth_image.data)}")
+			#msg += struct.pack('%sf' % len(data), *data)
+			msg += data
 		else:
 			msg += struct.pack("II", 0, 0)
 		if "feelings" in fields:

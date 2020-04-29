@@ -1,6 +1,6 @@
 import furl
-from ..sql_driver import sql_driver as sqd
-from ..mdb_driver import mdb_driver as mdb
+from sql_driver import sql_driver as sqd
+from mdb_driver import mdb_driver as mdb
 
 class Saver:
 	def __init__(self, url):

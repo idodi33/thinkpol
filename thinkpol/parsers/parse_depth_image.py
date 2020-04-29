@@ -27,4 +27,5 @@ def parse_depth_image(snapshot):
 	json_parsed = json.dumps(json_parsed)	# turns our dictionary into something we can send forward.
 	return json_parsed
 
+
 parse_depth_image.field = "depth_image"

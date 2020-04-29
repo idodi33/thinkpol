@@ -5,6 +5,8 @@ from datetime import datetime
 from ..protobufs import cortex_pb2
 from ..utils import reader
 from . import test_utils as tu
+import time
+import os
 
 
 def generate_binary_file(path):
@@ -25,13 +27,13 @@ def generate_binary_file(path):
 	bin += struct.pack("ii", tu._C_HEIGHT, tu._C_WIDTH)
 	bin += tu._C_DATA
 	bin += struct.pack("ii", tu._D_HEIGHT, tu._D_WIDTH)
-	bin += struct.pack(f"{len(tu._D_DATA)}f", *tu._D_DATA)
+	#bin += struct.pack(f"{len(tu._D_DATA)}f", *tu._D_DATA)
+	bin += tu._D_DATA
 	bin += struct.pack("ffff",
 		tu._HUNGER, tu._THIRST, tu._EXHAUSTION, tu._HAPPINESS
 		)
 	with open(path, "wb+") as f:
 		f.write(bin)
-	print(bin)
 
 
 gender_dict = {"m": 0, "f": 1, "o": 2}
@@ -113,11 +115,12 @@ def test_reader(userfile):
 		tu._ROTATION_Y, tu._ROTATION_Z, tu._ROTATION_W))
 	assert snap.c_height == tu._C_HEIGHT
 	assert snap.c_width == tu._C_WIDTH
-	assert snap.color_image.data == tu._C_DATA
+	if userfile.name.endswith(".gz"):
+		assert (snap.color_image.data == tu._C_DATA)
 	assert snap.d_height == tu._D_HEIGHT
 	assert snap.d_width == tu._D_WIDTH
-	d_bytes = struct.pack(f"{len(tu._D_DATA)}f", *tu._D_DATA)
-	assert snap.depth_image.data == d_bytes
+	if not userfile.name.endswith(".gz"):
+		assert (snap.depth_image.data == tu._D_DATA)
 	assert snap.hunger == tu._HUNGER
 	assert snap.thirst == tu._THIRST
 	assert snap.exhaustion == tu._EXHAUSTION
