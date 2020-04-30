@@ -7,9 +7,13 @@ import json
 import pathlib
 
 
-def parse_depth_image(snapshot):
+def parse_depth_image(snapshot, data_dir=None):
 	js = json.loads(snapshot)
-	depth_file_path = get_file_path(snapshot, 'depth')  # path of the file that will contain the parsed image	
+	if data_dir:
+		# path of the file that will contain the parsed image
+		depth_file_path = get_file_path(snapshot, 'depth', data_dir)
+	else:
+		depth_file_path = get_file_path(snapshot, 'depth')	
 	raw_file_path = pathlib.Path(js['depth_image'])		# path of the file that contains the raw data
 	data = np.fromfile(raw_file_path, dtype=np.float32)
 	print(f"Size of data array is {len(data)}")

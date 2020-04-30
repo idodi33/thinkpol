@@ -75,16 +75,9 @@ def get_result(host, port, save, user_id, snapshot_id, result_name):
 
 
 def main(argv):
-    print("main is running")
-    no_errors = True
-    try:
-        cli()
-    except Exception:
-        no_errors = False
-        raise
-    finally:
-        if no_errors:
-            print('done')
+	print("main is running")
+	cli()
+	print('done')
 
 
 if __name__ == '__main__':

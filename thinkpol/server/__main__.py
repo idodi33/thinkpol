@@ -23,24 +23,16 @@ def parse_url(url):
 	connects to it and returns a publishing function that the server can use.
 	'''
 	parsed_url = furl.furl(url)
-	for option in mq_options:
-		if parsed_url.scheme == option:
-			func = mq_options[option]
-			return func(parsed_url.host, parsed_url.port)
+	if parsed_url.scheme in mq_options:
+		func = mq_options[parsed_url.scheme]
+		return func(parsed_url.host, parsed_url.port)
 	else:
 		raise ValueError(f"No driver for message queue type {parsed_url.scheme}")
 
 def main(argv):
 	print("main is running")
-	no_errors = True
-	try:
-		cli()
-	except Exception:
-		no_errors = False
-		raise
-	finally:
-		if no_errors:
-			print('done')
+	cli()
+	print('done')
 
 
 if __name__ == '__main__':

@@ -47,11 +47,16 @@ class DataBase:
 				}
 		else:
 			raise ValueError("Error in mongodb driver save: Invalid field")
-		update.update({'datetime': data['datetime'], 'parent_user_id': data['user_id']})
+		update.update({
+			'datetime': data['datetime'], 
+			'parent_user_id': data['user_id']
+			})
 		print(f'update is: {update}')
 		data_dict = {'$set': update}
 		print(f"data dict is {data_dict}")
-		self.snapshots.update_one({'datetime': data['datetime']}, data_dict,
+		self.snapshots.update_one(
+			{'datetime': data['datetime']}, 
+			data_dict,
 			True	# upsert
 			)
 		print("mdb_driver: saved message")
@@ -69,12 +74,20 @@ class DataBase:
 		elif request == 'user':
 			ret = self.users.find({'user_id': user_id})
 		elif request == 'snapshots':
-			ret = self.snapshots.find({'parent_user_id':user_id}, {'parent_user_id': 1, 'datetime': 1})
+			ret = self.snapshots.find(
+				{'parent_user_id':user_id}, 
+				{'parent_user_id': 1, 'datetime': 1}
+				)
 		elif request == 'snapshot':
-			ret = self.snapshots.find({'parent_user_id': user_id, 'datetime': snapshot_id})
+			ret = self.snapshots.find({
+				'parent_user_id': user_id, 
+				'datetime': snapshot_id}
+				)
 		elif request == 'result':
-			ret = self.snapshots.find({'parent_user_id': user_id, 'datetime': snapshot_id}, 
-				DataBase.result_to_dict(result_name))
+			ret = self.snapshots.find(
+				{'parent_user_id': user_id, 'datetime': snapshot_id}, 
+				DataBase.result_to_dict(result_name)
+				)
 		else:
 			raise ValueError("Error in mongodb driver find: Invalid field")
 		return bson.json_util.dumps(ret)	# this turns a cursor object, returned by find, to json

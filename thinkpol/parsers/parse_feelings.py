@@ -2,7 +2,7 @@ import json
 from .parser_utils import extract_metadata
 
 
-def parse_feelings(snapshot):
+def parse_feelings(snapshot, data_dir=None):
 	js = json.loads(snapshot)
 	json_parsed = extract_metadata(js)
 	json_parsed['hunger'] = js['hunger']

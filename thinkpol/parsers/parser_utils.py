@@ -5,21 +5,21 @@ import json
 from datetime import datetime
 
 DATA_DIR = os.path.join(os.getcwd(), 'parsed_data')
-
+print(f"parser_utils: DATA_DIR is {DATA_DIR}")
 
 lock = threading.Lock()
 
-def get_file_path(snapshot, type):
+def get_file_path(snapshot, type, data_dir=DATA_DIR):
 	"""
 	Gets a snapshot and returns file paths for the parsed color/depth image (depending on type).
 	"""
-	print(f"get_file_path: DATA_DIR is {DATA_DIR}")
+	print(f"get_file_path: data_dir is {data_dir}")
 	json_snap = json.loads(snapshot)
 	datetime_obj = datetime.fromtimestamp(json_snap['datetime'] / 1000)
 	formatted_time = datetime.strftime( datetime_obj, "%Y-%m-%d_%H-%M-%S-%f")
 	
 	with lock:
-		subdir_pathname = os.path.join(DATA_DIR , formatted_time)
+		subdir_pathname = os.path.join(data_dir , formatted_time)
 		subdir_path = pathlib.Path(subdir_pathname)
 		if not subdir_path.is_dir():
 			subdir_path.mkdir(parents=True, exist_ok=True)

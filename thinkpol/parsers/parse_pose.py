@@ -2,7 +2,7 @@ import json
 from .parser_utils import extract_metadata
 
 
-def parse_pose(snapshot):
+def parse_pose(snapshot, data_dir=None):
 	js = json.loads(snapshot)
 	json_parsed = extract_metadata(js)
 	(x, y, z) = js['translation']
