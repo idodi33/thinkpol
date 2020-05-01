@@ -1,8 +1,17 @@
 import json
-from .parser_utils import extract_metadata
+from parsers.parser_utils import extract_metadata
 
 
 def parse_pose(snapshot, data_dir=None):
+	"""
+	Gets a json dict with snapshot data including pose data, 
+	and returns another json with differently formatted data.
+
+	:param snapshot: the snapshot we're parsing
+	:type snapshot: json
+	:returns: a json containing information about the snapshot.
+	:rtype: json
+	"""
 	js = json.loads(snapshot)
 	json_parsed = extract_metadata(js)
 	(x, y, z) = js['translation']

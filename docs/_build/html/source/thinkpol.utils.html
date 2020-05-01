@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>thinkpol.utils package &#8212; Thinkpol 1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="thinkpol-utils-package">
+<h1>thinkpol.utils package<a class="headerlink" href="#thinkpol-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-thinkpol.utils.connection">
+<span id="thinkpol-utils-connection-module"></span><h2>thinkpol.utils.connection module<a class="headerlink" href="#module-thinkpol.utils.connection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thinkpol.utils.connection.Connection">
+<em class="property">class </em><code class="sig-prename descclassname">thinkpol.utils.connection.</code><code class="sig-name descname">Connection</code><span class="sig-paren">(</span><em class="sig-param">sock</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.connection.Connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wraps a socket with functions that enable sending and receiving whole messages.
+Provides a send_message, receive_message, connect and close methods.
+Also functions as a context manager using connect and close.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sock</strong> (<em>socket</em>) – the socket that the connection wraps</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="thinkpol.utils.connection.Connection.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.connection.Connection.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.connection.Connection.connect">
+<em class="property">classmethod </em><code class="sig-name descname">connect</code><span class="sig-paren">(</span><em class="sig-param">host</em>, <em class="sig-param">port</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.connection.Connection.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new socket connected to host:port, wraps it in
+a Connection object and returns that.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – the host we connect to</p></li>
+<li><p><strong>port</strong> (<em>str</em>) – the port we connect to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the Connection object connected to host:port</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#thinkpol.utils.connection.Connection" title="thinkpol.utils.connection.Connection">Connection</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.connection.Connection.receive">
+<code class="sig-name descname">receive</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.connection.Connection.receive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.connection.Connection.receive_message">
+<code class="sig-name descname">receive_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.connection.Connection.receive_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives the size of message in bytes, and then message itself.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the binary message (without the size prepended)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.connection.Connection.send">
+<code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.connection.Connection.send" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.connection.Connection.send_message">
+<code class="sig-name descname">send_message</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.connection.Connection.send_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a chunk of binary data with its size prepended to it in binary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>bytes</em>) – the binary data we’re sending</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.utils.listener">
+<span id="thinkpol-utils-listener-module"></span><h2>thinkpol.utils.listener module<a class="headerlink" href="#module-thinkpol.utils.listener" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thinkpol.utils.listener.Listener">
+<em class="property">class </em><code class="sig-prename descclassname">thinkpol.utils.listener.</code><code class="sig-name descname">Listener</code><span class="sig-paren">(</span><em class="sig-param">port</em>, <em class="sig-param">host='0.0.0.0'</em>, <em class="sig-param">backlog=1000</em>, <em class="sig-param">reuseaddr=True</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.listener.Listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wraps a socket in functions that enable it to operate like
+a server socket.
+Provides start, stop and accept methods.
+Also functions as a context manager with start and stop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – the socket’s port</p></li>
+<li><p><strong>host</strong> (<em>str</em><em>, </em><em>optional</em>) – the socket’s host, defaults to localhost</p></li>
+<li><p><strong>backlog</strong> (<em>int</em><em>, </em><em>optional</em>) – the amount of clients the socket handles, defaults to 1000</p></li>
+<li><p><strong>reuseaddr</strong> (<em>boolean</em><em>, </em><em>optional</em>) – whether we cancel cooling off the socket’s port to allow reusage, defaults to True</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="thinkpol.utils.listener.Listener.accept">
+<code class="sig-name descname">accept</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.listener.Listener.accept" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accepts a new client through the socket.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a Connection object representing the connection to the client</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#thinkpol.utils.connection.Connection" title="thinkpol.utils.connection.Connection">Connection</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.listener.Listener.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.listener.Listener.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts listening on host:port through the socket.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.listener.Listener.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.listener.Listener.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops listening on host:port through the socket.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="thinkpol-utils-protocol-module">
+<h2>thinkpol.utils.protocol module<a class="headerlink" href="#thinkpol-utils-protocol-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-thinkpol.utils.snapshot">
+<span id="thinkpol-utils-snapshot-module"></span><h2>thinkpol.utils.snapshot module<a class="headerlink" href="#module-thinkpol.utils.snapshot" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thinkpol.utils.snapshot.ImageData">
+<em class="property">class </em><code class="sig-prename descclassname">thinkpol.utils.snapshot.</code><code class="sig-name descname">ImageData</code><span class="sig-paren">(</span><em class="sig-param">fmt</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.ImageData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a color/depth image, including its dimensions,
+format and data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fmt</strong> (<em>str</em>) – the image’s format (‘binary’ or ‘protobuf’)</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – the image’s width</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – the image’s height</p></li>
+<li><p><strong>data</strong> (<em>bytes</em>) – the image’s data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="thinkpol.utils.snapshot.Snapshot">
+<em class="property">class </em><code class="sig-prename descclassname">thinkpol.utils.snapshot.</code><code class="sig-name descname">Snapshot</code><span class="sig-paren">(</span><em class="sig-param">datetime</em>, <em class="sig-param">translation</em>, <em class="sig-param">rotation</em>, <em class="sig-param">c_height</em>, <em class="sig-param">c_width</em>, <em class="sig-param">color_image</em>, <em class="sig-param">d_height</em>, <em class="sig-param">d_width</em>, <em class="sig-param">depth_image</em>, <em class="sig-param">hunger</em>, <em class="sig-param">thirst</em>, <em class="sig-param">exhaustion</em>, <em class="sig-param">happiness</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.Snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a snapshot read from a formatted binary file.
+Provides methods for serializing/deserializing snapshot objects
+to/from binary data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datetime</strong> (<em>int</em>) – current time</p></li>
+<li><p><strong>translation</strong> (<em>tuple</em>) – 3-tuple of floats, represents current translation</p></li>
+<li><p><strong>rotation</strong> (<em>tuple</em>) – 4-tuple of floats, represents current rotation</p></li>
+<li><p><strong>c_height</strong> (<em>int</em>) – height of color image</p></li>
+<li><p><strong>c_width</strong> (<em>int</em>) – width of color image</p></li>
+<li><p><strong>color_image</strong> (<a class="reference internal" href="#thinkpol.utils.snapshot.ImageData" title="thinkpol.utils.snapshot.ImageData"><em>ImageData</em></a>) – an object representing the color image</p></li>
+<li><p><strong>d_height</strong> (<em>int</em>) – height of depth image</p></li>
+<li><p><strong>d_width</strong> (<em>int</em>) – width of depth image</p></li>
+<li><p><strong>depth_image</strong> (<a class="reference internal" href="#thinkpol.utils.snapshot.ImageData" title="thinkpol.utils.snapshot.ImageData"><em>ImageData</em></a>) – an object representing the depth image</p></li>
+<li><p><strong>hunger</strong> (<em>float</em>) – current level of hunger</p></li>
+<li><p><strong>thirst</strong> (<em>float</em>) – current level of thirst</p></li>
+<li><p><strong>exhaustion</strong> (<em>float</em>) – current level of exhaustion</p></li>
+<li><p><strong>happiness</strong> (<em>float</em>) – current level of happiness</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="thinkpol.utils.snapshot.Snapshot.deserialize">
+<em class="property">classmethod </em><code class="sig-name descname">deserialize</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.Snapshot.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserializes binary data representing a snapshot into
+a Snapshot object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>bytes</em>) – the data representing a snapshot</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the new snapshot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#thinkpol.utils.snapshot.Snapshot" title="thinkpol.utils.snapshot.Snapshot">Snapshot</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.snapshot.Snapshot.from_bytes">
+<em class="property">classmethod </em><code class="sig-name descname">from_bytes</code><span class="sig-paren">(</span><em class="sig-param">bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.Snapshot.from_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a snapshot by reading its data from a bytes object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bytes</strong> (<em>bytes</em>) – the source for the snapshot</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the new snapshot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#thinkpol.utils.snapshot.Snapshot" title="thinkpol.utils.snapshot.Snapshot">Snapshot</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.snapshot.Snapshot.from_proto_stream">
+<em class="property">classmethod </em><code class="sig-name descname">from_proto_stream</code><span class="sig-paren">(</span><em class="sig-param">stream</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.Snapshot.from_proto_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a snapshot by reading its data from a protobuf
+formatted bytes iterator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stream</strong> (<em>iterable</em>) – stream of snapshot data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the new snapshot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#thinkpol.utils.snapshot.Snapshot" title="thinkpol.utils.snapshot.Snapshot">Snapshot</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.snapshot.Snapshot.from_stream">
+<em class="property">classmethod </em><code class="sig-name descname">from_stream</code><span class="sig-paren">(</span><em class="sig-param">stream</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.Snapshot.from_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a snapshot by reading its data from a bytes iterator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stream</strong> (<em>iterable</em>) – stream of snapshot data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the new snapshot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#thinkpol.utils.snapshot.Snapshot" title="thinkpol.utils.snapshot.Snapshot">Snapshot</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.snapshot.Snapshot.serialize">
+<code class="sig-name descname">serialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.Snapshot.serialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the current snapshot into binary data,
+assuming we can parse exactly
+‘pose’, ‘color_image’, ‘depth_image’ and ‘feelings’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the serialized binary data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.utils.snapshot.Snapshot.serialize_request">
+<code class="sig-name descname">serialize_request</code><span class="sig-paren">(</span><em class="sig-param">fields</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.Snapshot.serialize_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the current snapshot into binary data,
+including only the fields that exist in ‘fields’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fields</strong> (<em>list</em>) – a list of the names of the fields</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the serialized binary data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.utils.snapshot.read_data">
+<code class="sig-prename descclassname">thinkpol.utils.snapshot.</code><code class="sig-name descname">read_data</code><span class="sig-paren">(</span><em class="sig-param">stream</em>, <em class="sig-param">size</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.utils.snapshot.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteratively reads a specific size of binary data
+from a binary stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>iterable</em>) – the stream of data we read from</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – the amount of data we read</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the binary data we’ve just read</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-thinkpol.utils" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Thinkpol</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ido Bar-Sella.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/thinkpol.utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

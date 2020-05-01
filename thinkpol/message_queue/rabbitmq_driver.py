@@ -3,6 +3,18 @@ import sys
 
 
 def create_server_publisher(host, port):
+	"""
+	Creates a publishing function a server can use
+	to upload snapshots to be parsed by functions in
+	the message queue.
+
+	:param host: the host of the message queue connection
+	:type host: str
+	:param port: the port of the message queue connection
+	:type port: str
+	:returns: the publishing function
+	:rtype: callable
+	"""
 	connection = pika.BlockingConnection(
 		pika.ConnectionParameters(host=host, port=int(port)))
 	channel = connection.channel()
@@ -27,6 +39,18 @@ def create_server_publisher(host, port):
 
 
 def create_parser_consumer(host, port):
+	"""
+	Creates a function that consumes data from the server's
+	message queue using a given parser, and sends that parsed
+	data to another message queue where it's received by a saver.
+
+	:param host: the host of the message queue connection
+	:type host: str
+	:param port: the port of the message queue connection
+	:type port: str
+	:returns: the consuming function
+	:rtype: callable
+	"""
 	connection = pika.BlockingConnection(
 	    pika.ConnectionParameters(host=host, port=int(port)))
 	channel = connection.channel()
@@ -40,7 +64,6 @@ def create_parser_consumer(host, port):
 		exchange='server_exchange', 
 		queue=queue_name
 		)
-
 	def parser_consume(parser):
 		'''
 		Consumes a snapshot published by the server from the message queue,
@@ -84,6 +107,17 @@ def make_callback_parser(parser, host, port):
 
 
 def create_saver_consumer(host, port):
+	"""
+	Creates a consuming function a saver can use
+	to receive parsed snapshots from parsers' message queues.
+	
+	:param host: the host of the message queue connection
+	:type host: str
+	:param port: the port of the message queue connection
+	:type port: str
+	:returns: the consuming function
+	:rtype: callable
+	"""
 	print("Started creating saver consumer")
 	connection = pika.BlockingConnection()
 	connection = pika.BlockingConnection(

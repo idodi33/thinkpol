@@ -1,6 +1,6 @@
 import datetime
-from .client_utils import get_user_msg, send_snapshot
-from .. import reader
+from client.client_utils import get_user_msg, send_snapshot
+from thinkpol.reader import reader
 #from .utils import protocol
 import time
 

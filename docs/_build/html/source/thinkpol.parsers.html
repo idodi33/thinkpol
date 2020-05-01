@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>thinkpol.parsers package &#8212; Thinkpol 1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="thinkpol-parsers-package">
+<h1>thinkpol.parsers package<a class="headerlink" href="#thinkpol-parsers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-thinkpol.parsers.parse_color_image">
+<span id="thinkpol-parsers-parse-color-image-module"></span><h2>thinkpol.parsers.parse_color_image module<a class="headerlink" href="#module-thinkpol.parsers.parse_color_image" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thinkpol.parsers.parse_color_image.parse_color_image">
+<code class="sig-prename descclassname">thinkpol.parsers.parse_color_image.</code><code class="sig-name descname">parse_color_image</code><span class="sig-paren">(</span><em class="sig-param">snapshot</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.parsers.parse_color_image.parse_color_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a snapshot containing a path to raw color image data,
+parses that data and saves it in a path depending on the optional
+data_dir argument, and returns information about that snapshot
+in json format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snapshot</strong> (<em>json</em>) – the snapshot we’re parsing</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – the directory in which we want to save the parsed image</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a json containing information about the snapshot, including the address</p>
+</dd>
+</dl>
+<p>of the parsed color image we’ve saved
+:rtype: json</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.parsers.parse_depth_image">
+<span id="thinkpol-parsers-parse-depth-image-module"></span><h2>thinkpol.parsers.parse_depth_image module<a class="headerlink" href="#module-thinkpol.parsers.parse_depth_image" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thinkpol.parsers.parse_depth_image.parse_depth_image">
+<code class="sig-prename descclassname">thinkpol.parsers.parse_depth_image.</code><code class="sig-name descname">parse_depth_image</code><span class="sig-paren">(</span><em class="sig-param">snapshot</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.parsers.parse_depth_image.parse_depth_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a snapshot containing a path to raw depth image data,
+parses that data and saves it in a path depending on the optional
+data_dir argument, and returns information about that snapshot
+in json format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snapshot</strong> (<em>json</em>) – the snapshot we’re parsing</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – the directory in which we want to save the parsed image</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a json containing information about the snapshot, including the address</p>
+</dd>
+</dl>
+<p>of the parsed depth image we’ve saved
+:rtype: json</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.parsers.parse_feelings">
+<span id="thinkpol-parsers-parse-feelings-module"></span><h2>thinkpol.parsers.parse_feelings module<a class="headerlink" href="#module-thinkpol.parsers.parse_feelings" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thinkpol.parsers.parse_feelings.parse_feelings">
+<code class="sig-prename descclassname">thinkpol.parsers.parse_feelings.</code><code class="sig-name descname">parse_feelings</code><span class="sig-paren">(</span><em class="sig-param">snapshot</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.parsers.parse_feelings.parse_feelings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a json dict with snapshot data including feelings,
+and returns another json with differently formatted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>snapshot</strong> (<em>json</em>) – the snapshot we’re parsing</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a json containing information about the snapshot.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.parsers.parse_pose">
+<span id="thinkpol-parsers-parse-pose-module"></span><h2>thinkpol.parsers.parse_pose module<a class="headerlink" href="#module-thinkpol.parsers.parse_pose" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thinkpol.parsers.parse_pose.parse_pose">
+<code class="sig-prename descclassname">thinkpol.parsers.parse_pose.</code><code class="sig-name descname">parse_pose</code><span class="sig-paren">(</span><em class="sig-param">snapshot</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.parsers.parse_pose.parse_pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a json dict with snapshot data including pose data,
+and returns another json with differently formatted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>snapshot</strong> (<em>json</em>) – the snapshot we’re parsing</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a json containing information about the snapshot.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.parsers.parser_utils">
+<span id="thinkpol-parsers-parser-utils-module"></span><h2>thinkpol.parsers.parser_utils module<a class="headerlink" href="#module-thinkpol.parsers.parser_utils" title="Permalink to this headline">¶</a></h2>
+<p>A collection of common utilities used by one or more of the parsers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param DATA_DIR</dt>
+<dd class="field-odd"><p>the directory in which that parsed images</p>
+</dd>
+</dl>
+<p>are saved by default
+:type DATA_DIR: str
+:param lock: a threading lock used by the get_file_path function
+to make sure images are saved properly
+:type lock: Lock</p>
+<dl class="function">
+<dt id="thinkpol.parsers.parser_utils.extract_metadata">
+<code class="sig-prename descclassname">thinkpol.parsers.parser_utils.</code><code class="sig-name descname">extract_metadata</code><span class="sig-paren">(</span><em class="sig-param">json_snap</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.parsers.parser_utils.extract_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a dictionary with snapshot data and returns a
+dictionary containing only data about the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>json_snap</strong> (<em>json</em>) – the json containing the snapshot data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the dictionary containing user data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.parsers.parser_utils.get_file_path">
+<code class="sig-prename descclassname">thinkpol.parsers.parser_utils.</code><code class="sig-name descname">get_file_path</code><span class="sig-paren">(</span><em class="sig-param">snapshot</em>, <em class="sig-param">type</em>, <em class="sig-param">data_dir='/home/user/Thinkpol/docs/parsed_data'</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.parsers.parser_utils.get_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a snapshot and returns file paths for the parsed color/depth image (depending on type).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snapshot</strong> (<em>json</em>) – the snapshot containing the raw data paths</p></li>
+<li><p><strong>type</strong> (<em>str</em>) – the type of image whose path we need (‘color’/’depth’)</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – the root directory of the new file paths, defaults to DATA_DIR</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>path of the new file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>ValueError</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.parsers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-thinkpol.parsers" title="Permalink to this headline">¶</a></h2>
+<p>A collection of functions and classes that parse
+various parts of users’ cogintion snapshots.</p>
+<dl class="function">
+<dt id="thinkpol.parsers.parse">
+<code class="sig-prename descclassname">thinkpol.parsers.</code><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param">field</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.parsers.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the data with the parser that corresponds to field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>str</em>) – the type of data we need to parse</p></li>
+<li><p><strong>data</strong> (<em>json</em>) – the data we need to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the result of parsing the data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Thinkpol</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ido Bar-Sella.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/thinkpol.parsers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

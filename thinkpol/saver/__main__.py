@@ -1,8 +1,8 @@
 import click
 import furl
-from .saver import Saver
-from ..message_queue.rabbitmq_driver import create_saver_consumer
-from ..parsers import parsers
+from saver.saver import Saver
+from thinkpol.message_queue.rabbitmq_driver import create_saver_consumer
+from thinkpol.parsers import parsers
 
 
 @click.group()

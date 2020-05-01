@@ -1,6 +1,6 @@
-from ..utils import connection as cn
-from ..protobufs import cortex_pb2
-from ..protobufs import config_pb2
+from thinkpol.utils import connection as cn
+from thinkpol.protobufs import cortex_pb2
+from thinkpol.protobufs import config_pb2
 
 
 def get_user_msg(r):
@@ -28,8 +28,7 @@ def send_snapshot(user_msg, snapshot, host, port):
 	Sends a single snapshot of a user's cognition 
 	to server in address host:port.
 
-	:param user_msg: the serialized binary info of the
-	user who's snapshot we're to send
+	:param user_msg: the serialized binary info of the user who's snapshot we're to send
 	:type user_msg: bytes 
 	:param snapshot: the snapshot we're to send
 	:type snapshot: Snapshot

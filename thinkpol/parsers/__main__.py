@@ -1,7 +1,7 @@
 import click
 import furl
-from . import parsers, parse
-from ..message_queue.rabbitmq_driver import create_parser_consumer
+from thinkpol.parsers import parsers, parse
+from thinkpol.message_queue.rabbitmq_driver import create_parser_consumer
 #from ..message_queue.rabbitmq_driver import parser_publish
 
 

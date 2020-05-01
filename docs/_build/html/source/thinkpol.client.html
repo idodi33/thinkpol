@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>thinkpol.client package &#8212; Thinkpol 1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="thinkpol-client-package">
+<h1>thinkpol.client package<a class="headerlink" href="#thinkpol-client-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-thinkpol.client.client">
+<span id="thinkpol-client-client-module"></span><h2>thinkpol.client.client module<a class="headerlink" href="#module-thinkpol.client.client" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thinkpol.client.client.upload_sample">
+<code class="sig-prename descclassname">thinkpol.client.client.</code><code class="sig-name descname">upload_sample</code><span class="sig-paren">(</span><em class="sig-param">host</em>, <em class="sig-param">port</em>, <em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.client.client.upload_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accepts a host address, a port and a file name and uploads cognition snapshots
+from the file to the specified address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – the host we send the data to</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – the port we send the data to</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – the path of the file we process</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.client.client_utils">
+<span id="thinkpol-client-client-utils-module"></span><h2>thinkpol.client.client_utils module<a class="headerlink" href="#module-thinkpol.client.client_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thinkpol.client.client_utils.get_user_msg">
+<code class="sig-prename descclassname">thinkpol.client.client_utils.</code><code class="sig-name descname">get_user_msg</code><span class="sig-paren">(</span><em class="sig-param">r</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.client.client_utils.get_user_msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a formatted binary message containing user information
+from a reader object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference internal" href="thinkpol.reader.html#thinkpol.reader.reader.Reader" title="thinkpol.reader.reader.Reader"><em>Reader</em></a>) – the reader object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the formatted binary message</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.client.client_utils.send_snapshot">
+<code class="sig-prename descclassname">thinkpol.client.client_utils.</code><code class="sig-name descname">send_snapshot</code><span class="sig-paren">(</span><em class="sig-param">user_msg</em>, <em class="sig-param">snapshot</em>, <em class="sig-param">host</em>, <em class="sig-param">port</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.client.client_utils.send_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a single snapshot of a user’s cognition
+to server in address host:port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_msg</strong> (<em>bytes</em>) – the serialized binary info of the user who’s snapshot we’re to send</p></li>
+<li><p><strong>snapshot</strong> (<a class="reference internal" href="thinkpol.utils.html#thinkpol.utils.snapshot.Snapshot" title="thinkpol.utils.snapshot.Snapshot"><em>Snapshot</em></a>) – the snapshot we’re to send</p></li>
+<li><p><strong>host</strong> (<em>str</em>) – the host of the server</p></li>
+<li><p><strong>port</strong> (<em>str</em>) – the port of the server</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.client">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-thinkpol.client" title="Permalink to this headline">¶</a></h2>
+<p>Uploads cognition snapshots from a specified formatted binary file
+to a server.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Thinkpol</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ido Bar-Sella.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/thinkpol.client.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

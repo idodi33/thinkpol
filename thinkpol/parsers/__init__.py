@@ -12,8 +12,10 @@ import sys
 This framework collects functions that start with 'parse_' 
 and adds them to the parsers dict.
 """
+
 parsers = dict()
-root = pathlib.Path.cwd() /'thinkpol/parsers/'
+#root = pathlib.Path.cwd() /'thinkpol/parsers/'
+root = pathlib.Path(os.path.dirname(__file__))
 sys.path.insert(0, str(root.parent))
 for path in root.iterdir():
 	if path.name.startswith("_") or not path.suffix == '.py':

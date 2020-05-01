@@ -1,4 +1,4 @@
-from .connection import Connection
+from utils.connection import Connection
 import socket
 
 
@@ -13,11 +13,9 @@ class Listener:
     :type port: int
     :param host: the socket's host, defaults to localhost
     :type host: str, optional
-    :param backlog: the amount of clients the socket handles,
-    defaults to 1000
+    :param backlog: the amount of clients the socket handles, defaults to 1000
     :type backlog: int, optional
-    :param reuseaddr: whether we cancel cooling off the socket's
-    port to allow reusage, defaults to True
+    :param reuseaddr: whether we cancel cooling off the socket's port to allow reusage, defaults to True
     :type reuseaddr: boolean, optional
     """
     def __init__(self, port, host='0.0.0.0', backlog=1000, reuseaddr=True):
@@ -49,7 +47,7 @@ class Listener:
     def accept(self):
         """
         Accepts a new client through the socket.
-        
+
         :returns: a Connection object representing the connection to the client
         :rtype: Connection
         """

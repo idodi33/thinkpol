@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>thinkpol.message_queue package &#8212; Thinkpol 1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="thinkpol-message-queue-package">
+<h1>thinkpol.message_queue package<a class="headerlink" href="#thinkpol-message-queue-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-thinkpol.message_queue.rabbitmq_driver">
+<span id="thinkpol-message-queue-rabbitmq-driver-module"></span><h2>thinkpol.message_queue.rabbitmq_driver module<a class="headerlink" href="#module-thinkpol.message_queue.rabbitmq_driver" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thinkpol.message_queue.rabbitmq_driver.create_parser_consumer">
+<code class="sig-prename descclassname">thinkpol.message_queue.rabbitmq_driver.</code><code class="sig-name descname">create_parser_consumer</code><span class="sig-paren">(</span><em class="sig-param">host</em>, <em class="sig-param">port</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.message_queue.rabbitmq_driver.create_parser_consumer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a function that consumes data from the server’s
+message queue using a given parser, and sends that parsed
+data to another message queue where it’s received by a saver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – the host of the message queue connection</p></li>
+<li><p><strong>port</strong> (<em>str</em>) – the port of the message queue connection</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the consuming function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.message_queue.rabbitmq_driver.create_saver_consumer">
+<code class="sig-prename descclassname">thinkpol.message_queue.rabbitmq_driver.</code><code class="sig-name descname">create_saver_consumer</code><span class="sig-paren">(</span><em class="sig-param">host</em>, <em class="sig-param">port</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.message_queue.rabbitmq_driver.create_saver_consumer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a consuming function a saver can use
+to receive parsed snapshots from parsers’ message queues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – the host of the message queue connection</p></li>
+<li><p><strong>port</strong> (<em>str</em>) – the port of the message queue connection</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the consuming function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.message_queue.rabbitmq_driver.create_server_publisher">
+<code class="sig-prename descclassname">thinkpol.message_queue.rabbitmq_driver.</code><code class="sig-name descname">create_server_publisher</code><span class="sig-paren">(</span><em class="sig-param">host</em>, <em class="sig-param">port</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.message_queue.rabbitmq_driver.create_server_publisher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a publishing function a server can use
+to upload snapshots to be parsed by functions in
+the message queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – the host of the message queue connection</p></li>
+<li><p><strong>port</strong> (<em>str</em>) – the port of the message queue connection</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the publishing function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.message_queue.rabbitmq_driver.make_callback_parser">
+<code class="sig-prename descclassname">thinkpol.message_queue.rabbitmq_driver.</code><code class="sig-name descname">make_callback_parser</code><span class="sig-paren">(</span><em class="sig-param">parser</em>, <em class="sig-param">host</em>, <em class="sig-param">port</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.message_queue.rabbitmq_driver.make_callback_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a parser and an address and creates a callback function
+that receives messages from the message queue, parses them
+and publishes them to the saver.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.message_queue.rabbitmq_driver.make_callback_saver">
+<code class="sig-prename descclassname">thinkpol.message_queue.rabbitmq_driver.</code><code class="sig-name descname">make_callback_saver</code><span class="sig-paren">(</span><em class="sig-param">field</em>, <em class="sig-param">saver</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.message_queue.rabbitmq_driver.make_callback_saver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a saver and a field and returns a callback function that
+receives messages from the message queue and saves them
+to the database.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.message_queue">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-thinkpol.message_queue" title="Permalink to this headline">¶</a></h2>
+<p>A driver containing functions the various parts of the project that need
+a message queue can use, using rabbitmq.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Thinkpol</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ido Bar-Sella.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/thinkpol.message_queue.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

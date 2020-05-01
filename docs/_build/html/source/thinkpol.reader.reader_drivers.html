@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>thinkpol.reader.reader_drivers package &#8212; Thinkpol 1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="thinkpol-reader-reader-drivers-package">
+<h1>thinkpol.reader.reader_drivers package<a class="headerlink" href="#thinkpol-reader-reader-drivers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-thinkpol.reader.reader_drivers.binary_driver">
+<span id="thinkpol-reader-reader-drivers-binary-driver-module"></span><h2>thinkpol.reader.reader_drivers.binary_driver module<a class="headerlink" href="#module-thinkpol.reader.reader_drivers.binary_driver" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thinkpol.reader.reader_drivers.binary_driver.BinaryDriver">
+<em class="property">class </em><code class="sig-prename descclassname">thinkpol.reader.reader_drivers.binary_driver.</code><code class="sig-name descname">BinaryDriver</code><span class="sig-paren">(</span><em class="sig-param">file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.reader.reader_drivers.binary_driver.BinaryDriver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Reads formatted binary data from a given file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<em>str</em>) – the name of the file</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – the amount of bytes already read from the file</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="thinkpol.reader.reader_drivers.binary_driver.BinaryDriver.field">
+<code class="sig-name descname">field</code><em class="property"> = 'binary'</em><a class="headerlink" href="#thinkpol.reader.reader_drivers.binary_driver.BinaryDriver.field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.reader.reader_drivers.binary_driver.BinaryDriver.get_snap_iterator">
+<code class="sig-name descname">get_snap_iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.reader.reader_drivers.binary_driver.BinaryDriver.get_snap_iterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads snapshots from the given file iteratively.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.reader.reader_drivers.binary_driver.BinaryDriver.get_user_info">
+<code class="sig-name descname">get_user_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.reader.reader_drivers.binary_driver.BinaryDriver.get_user_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads user info from the given file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a 4-tuple - (user_id, user_name, birth_date, gender), containing user data.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.reader.reader_drivers.protobuf_driver">
+<span id="thinkpol-reader-reader-drivers-protobuf-driver-module"></span><h2>thinkpol.reader.reader_drivers.protobuf_driver module<a class="headerlink" href="#module-thinkpol.reader.reader_drivers.protobuf_driver" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thinkpol.reader.reader_drivers.protobuf_driver.ProtobufDriver">
+<em class="property">class </em><code class="sig-prename descclassname">thinkpol.reader.reader_drivers.protobuf_driver.</code><code class="sig-name descname">ProtobufDriver</code><span class="sig-paren">(</span><em class="sig-param">file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.reader.reader_drivers.protobuf_driver.ProtobufDriver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Reads formatted gzipped protobuf data from a given file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<em>str</em>) – the name of the file</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – the amount of bytes already read from the file</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="thinkpol.reader.reader_drivers.protobuf_driver.ProtobufDriver.field">
+<code class="sig-name descname">field</code><em class="property"> = 'protobuf'</em><a class="headerlink" href="#thinkpol.reader.reader_drivers.protobuf_driver.ProtobufDriver.field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.reader.reader_drivers.protobuf_driver.ProtobufDriver.get_snap_iterator">
+<code class="sig-name descname">get_snap_iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.reader.reader_drivers.protobuf_driver.ProtobufDriver.get_snap_iterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads snapshots from the given file iteratively.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.reader.reader_drivers.protobuf_driver.ProtobufDriver.get_user_info">
+<code class="sig-name descname">get_user_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.reader.reader_drivers.protobuf_driver.ProtobufDriver.get_user_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads user info from the given file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a 4-tuple - (user_id, user_name, birth_date, gender), containing user data.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.reader.reader_drivers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-thinkpol.reader.reader_drivers" title="Permalink to this headline">¶</a></h2>
+<p>A framework that collects classes that end with ‘Driver’
+and adds them to the drivers dict.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Thinkpol</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ido Bar-Sella.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/thinkpol.reader.reader_drivers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

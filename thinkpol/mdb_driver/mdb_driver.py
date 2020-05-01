@@ -3,6 +3,14 @@ import json
 import bson.json_util
 
 class DataBase:
+	"""
+	Saves and reads formatted data from a specified mongodb database.
+
+	:param host: the host of the db connection, defaults to 'localhost'
+	:type host: str, optional
+	:param port: the port of the db connection, defaults to 27017
+	:type port: int, optional
+	"""
 	def __init__(self, host='localhost', port=27017):
 		self.client = MongoClient(host=host, port=port)
 		self.db = self.client.db
@@ -11,9 +19,15 @@ class DataBase:
 
 
 	def save(self, field, data):
-		'''
+		"""
 		Gets a json with data from parser and saves it into the database.
-		'''
+
+		:param field: the field of snapshot data that the json contains
+		:type field: str
+		:param data: the snapshot data
+		:type data: json
+		:raises: ValueError
+		"""
 		data = json.loads(data)
 		print(f"mdb_driver: data to be saved is {data}")
 		self.users.update_one({'user_id': data['user_id']},
@@ -51,24 +65,29 @@ class DataBase:
 			'datetime': data['datetime'], 
 			'parent_user_id': data['user_id']
 			})
-		print(f'update is: {update}')
 		data_dict = {'$set': update}
-		print(f"data dict is {data_dict}")
 		self.snapshots.update_one(
-			{'datetime': data['datetime']}, 
-			data_dict,
-			True	# upsert
+			{'datetime': data['datetime']}, data_dict, True	# upsert
 			)
 		print("mdb_driver: saved message")
 
 
 	def find(self, request, user_id=None, snapshot_id=None, result_name=None):
-		'''
-		Gets a find request of the type 'users'/'user'/'snapshots'/'snapshot'/'result'
-		and returns the matching data from the database.
-		'''
-		#user_id = None if user_id is None else int(user_id)
-		#snapshot_id = None if snapshot_id is None else int(snapshot_id)
+		"""
+		Gets a find request and returns the matching data from the database.
+
+		:param request: type of request ('users'/'user'/'snapshots'/'snapshot'/'result')
+		:type request: str
+		:param user_id: id of the desired user, defaults to None
+		:type user_id: int, optional
+		:param snapshot_id: id (datetime in seconds) of the specified snapshot, defaults to None
+		:type snapshot_id: int, optional
+		:param result_name: field of desired data, defaults to None
+		:type result_name: str, optional
+		:returns: json containing the data as pulled from the database
+		:rtype: json
+		:raises: ValueError
+		"""
 		if request == 'users':
 			ret = self.users.find({}, {'user_id': 1, 'username' : 1})
 		elif request == 'user':
@@ -86,8 +105,7 @@ class DataBase:
 		elif request == 'result':
 			ret = self.snapshots.find(
 				{'parent_user_id': user_id, 'datetime': snapshot_id}, 
-				DataBase.result_to_dict(result_name)
-				)
+				DataBase.result_to_dict(result_name))
 		else:
 			raise ValueError("Error in mongodb driver find: Invalid field")
 		return bson.json_util.dumps(ret)	# this turns a cursor object, returned by find, to json

@@ -3,7 +3,7 @@ import os
 from PIL import Image
 from datetime import datetime
 import io
-from ..protobufs import cortex_pb2
+from thinkpol.protobufs import cortex_pb2
 
 
 _SNP_FORMAT = "Snapshot from {0} at {1} on {2} / {3} with a {4}x{5} color \

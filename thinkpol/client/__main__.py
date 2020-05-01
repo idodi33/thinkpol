@@ -1,5 +1,5 @@
 import click
-from . import client as cln
+from client import client as cln
 
 @click.group()
 def cli():

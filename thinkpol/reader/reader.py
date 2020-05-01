@@ -1,8 +1,6 @@
 import struct
-from .user_readers import user_readers
-from .snap_readers import snap_readers
 from datetime import datetime
-
+from reader.reader_drivers import drivers
 
 _USR_FORMAT = "user {0}: {1}, born {2} ({3})"
 
@@ -21,17 +19,13 @@ class Reader:
 	def __init__(self, file_name, format):
 		print("Currently reading file")
 		self.format = format
-		if format in user_readers:
-			self.user_id, self.user_name, self.birth_date, \
-			self.gender, offset = user_readers[format](file_name)
+		if format in drivers:
+			driver = drivers[format](file_name)
 		else:
-			raise ValueError(f'Invalid format: {self.format}')
-		if format in snap_readers:
-			self.snapshots_iterator = snap_readers[format](
-				file_name, offset
-				)
-		else: 
-			raise ValueError(f'Invalid format: {self.format}')
+			raise ValueError(f'Invalid format: {format}')
+		self.user_id, self.user_name, self.birth_date, \
+		self.gender, = driver.get_user_info()
+		self.snapshots_iterator = driver.get_snap_iterator()
 		print("Done with reader init")
 
 	def __str__(self):

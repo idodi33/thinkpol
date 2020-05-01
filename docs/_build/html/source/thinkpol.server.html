@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>thinkpol.server package &#8212; Thinkpol 1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="thinkpol-server-package">
+<h1>thinkpol.server package<a class="headerlink" href="#thinkpol-server-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-thinkpol.server.server">
+<span id="thinkpol-server-server-module"></span><h2>thinkpol.server.server module<a class="headerlink" href="#module-thinkpol.server.server" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thinkpol.server.server.Handler">
+<em class="property">class </em><code class="sig-prename descclassname">thinkpol.server.server.</code><code class="sig-name descname">Handler</code><span class="sig-paren">(</span><em class="sig-param">connection</em>, <em class="sig-param">publish</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.server.server.Handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></p>
+<p>Handles connection the server gets in a multithreaded way.
+:param connection: the connection the server gets
+:type connection: Connection
+:param publish: the function to which we publish the data
+:type publish: callable</p>
+<dl class="attribute">
+<dt id="thinkpol.server.server.Handler.lock">
+<code class="sig-name descname">lock</code><em class="property"> = &lt;unlocked _thread.lock object&gt;</em><a class="headerlink" href="#thinkpol.server.server.Handler.lock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="thinkpol.server.server.Handler.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.server.server.Handler.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles one client’s request and opens/edits a corresponding file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.server.server.run_server">
+<code class="sig-prename descclassname">thinkpol.server.server.</code><code class="sig-name descname">run_server</code><span class="sig-paren">(</span><em class="sig-param">host</em>, <em class="sig-param">port</em>, <em class="sig-param">publish</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.server.server.run_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts receiving connections from clients on host:port, and publishing
+the data we receive to the function publish.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – the host on which we’re listening</p></li>
+<li><p><strong>port</strong> (<em>str</em>) – the port on which we’re listening</p></li>
+<li><p><strong>publish</strong> (<em>callable</em>) – the function to which we publish the data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.server.server_utils">
+<span id="thinkpol-server-server-utils-module"></span><h2>thinkpol.server.server_utils module<a class="headerlink" href="#module-thinkpol.server.server_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thinkpol.server.server_utils.available_fields">
+<code class="sig-prename descclassname">thinkpol.server.server_utils.</code><code class="sig-name descname">available_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.server.server_utils.available_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the fields we can currently handle, according
+to which parsers we currently have.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of the names (strings) of the available fields</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.server.server_utils.filter_dict">
+<code class="sig-prename descclassname">thinkpol.server.server_utils.</code><code class="sig-name descname">filter_dict</code><span class="sig-paren">(</span><em class="sig-param">snapshot_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.server.server_utils.filter_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a dictionary with snapshot data and returns
+an updated dict, containing only the fields our
+parsers can handle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>snapshot_dict</strong> (<em>dict</em>) – the original dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the filtered dict</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.server.server_utils.make_snapshot_dict">
+<code class="sig-prename descclassname">thinkpol.server.server_utils.</code><code class="sig-name descname">make_snapshot_dict</code><span class="sig-paren">(</span><em class="sig-param">user</em>, <em class="sig-param">snapshot</em>, <em class="sig-param">c_path</em>, <em class="sig-param">d_path</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.server.server_utils.make_snapshot_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets user and snapshot objects and creates a dict with
+their corresponding info to be turned into a json
+and parsed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> (<em>cortex_pb2.User</em>) – the user object</p></li>
+<li><p><strong>snapshot</strong> (<a class="reference internal" href="thinkpol.utils.html#thinkpol.utils.snapshot.Snapshot" title="thinkpol.utils.snapshot.Snapshot"><em>Snapshot</em></a>) – the snapshot object</p></li>
+<li><p><strong>c_path</strong> (<em>str</em>) – the path to the color image</p></li>
+<li><p><strong>d_path</strong> (<em>str</em>) – the path to the depth image</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the dict that was created</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="thinkpol.server.server_utils.save_images">
+<code class="sig-prename descclassname">thinkpol.server.server_utils.</code><code class="sig-name descname">save_images</code><span class="sig-paren">(</span><em class="sig-param">snapshot</em><span class="sig-paren">)</span><a class="headerlink" href="#thinkpol.server.server_utils.save_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a snapshot, saves the color and depth data in bytes to files on disk,
+and returns the file paths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>snapshot</strong> (<a class="reference internal" href="thinkpol.utils.html#thinkpol.utils.snapshot.Snapshot" title="thinkpol.utils.snapshot.Snapshot"><em>Snapshot</em></a>) – the snapshot from which we get the data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a 2-tuple - (color_image_path, depth_image_path)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thinkpol.server">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-thinkpol.server" title="Permalink to this headline">¶</a></h2>
+<p>Receives data about users and snapshots of their cognition
+from clients and sends it to parsing functions that parse
+that data and use it in various ways.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Thinkpol</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ido Bar-Sella.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/thinkpol.server.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

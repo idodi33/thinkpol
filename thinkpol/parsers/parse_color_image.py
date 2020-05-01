@@ -1,18 +1,25 @@
 from datetime import datetime
 from PIL import Image
-from .parser_utils import get_file_path
-from .parser_utils import extract_metadata
+from parsers.parser_utils import get_file_path
+from parsers.parser_utils import extract_metadata
 import json
 import pathlib
 
 
 def parse_color_image(snapshot, data_dir=None):
 	"""
-	[description]
-	:param snapshot: [description]
-	:type snapshot: [type]
-	:returns: [description]
-	:rtype: {[type]}
+	Gets a snapshot containing a path to raw color image data, 
+	parses that data and saves it in a path depending on the optional
+	data_dir argument, and returns information about that snapshot
+	in json format.
+
+	:param snapshot: the snapshot we're parsing
+	:type snapshot: json
+	:param data_dir: the directory in which we want to save the parsed image
+	:type data_dir: str, optional
+	:returns: a json containing information about the snapshot, including the address
+	of the parsed color image we've saved
+	:rtype: json
 	"""
 	js = json.loads(snapshot)
 	if data_dir:

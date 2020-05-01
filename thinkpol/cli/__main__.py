@@ -9,6 +9,7 @@ import json
 def cli():
     pass
 
+
 @cli.command('get-users')
 @click.option('-h', '--host', default='127.0.0.1')
 @click.option('-p', '--port', default='5000')
@@ -28,6 +29,7 @@ def get_user(host, port, user_id):
     r = requests.get(url.url)
     print(r.json())
 
+
 @cli.command('get-snapshots')
 @click.option('-h', '--host', default='127.0.0.1')
 @click.option('-p', '--port', default='5000')
@@ -37,6 +39,7 @@ def get_snapshots(host, port, user_id):
     url.set(host=host, port=port, path=['users', user_id, 'snapshots'])
     r = requests.get(url.url)
     print(r.json())
+
 
 @cli.command('get-snapshot')
 @click.option('-h', '--host', default='127.0.0.1')
@@ -49,6 +52,7 @@ def get_snapshot(host, port, user_id, snapshot_id):
     'snapshots', snapshot_id])
     r = requests.get(url.url)
     print(r.json())
+
 
 @cli.command('get-result')
 @click.option('-h', '--host', default='127.0.0.1')

@@ -1,9 +1,9 @@
 import threading
-from .server_utils import save_images, available_fields, filter_dict, make_snapshot_dict
-from ..utils import listener as lsn
-from ..utils import snapshot as snp
-from ..protobufs import cortex_pb2
-from ..protobufs import config_pb2
+from thinkpol.server.server_utils import save_images, available_fields, filter_dict, make_snapshot_dict
+from thinkpol.utils import listener as lsn
+from thinkpol.utils import snapshot as snp
+from thinkpol.protobufs import cortex_pb2
+from thinkpol.protobufs import config_pb2
 import json
 import os
 

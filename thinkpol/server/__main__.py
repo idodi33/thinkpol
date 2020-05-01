@@ -1,10 +1,11 @@
-from . import server as srv
+from server import server as srv
 import furl
 import click
-from  ..message_queue import create_server_publisher
+from  thinkpol.message_queue import create_server_publisher
 @click.group()
 def cli():
 	pass
+
 
 @cli.command('run-server')
 @click.option('--host', '-h', default='127.0.0.1')
@@ -14,8 +15,10 @@ def run_server(host, port, url):
 	publish = parse_url(url)
 	return srv.run_server(host, int(port), publish)
 
+
 # Here you can add other message queue options.
 mq_options = {'rabbitmq': create_server_publisher}
+
 
 def parse_url(url):
 	'''
@@ -28,6 +31,7 @@ def parse_url(url):
 		return func(parsed_url.host, parsed_url.port)
 	else:
 		raise ValueError(f"No driver for message queue type {parsed_url.scheme}")
+
 
 def main(argv):
 	print("main is running")

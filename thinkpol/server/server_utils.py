@@ -2,7 +2,7 @@ import threading
 from datetime import datetime
 import os
 import pathlib
-from ..parsers import parsers
+from thinkpol.parsers import parsers
 
 
 lock = threading.Lock()
