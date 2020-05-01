@@ -13,8 +13,6 @@
 import os
 import sys
 
-autodoc_mock_imports = ['matplotlib', 'numpy', 'google', 'PIL']
-
 
 sys.path.insert(0, os.path.abspath('..'))
 
