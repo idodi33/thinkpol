@@ -1,4 +1,4 @@
-from utils.connection import Connection
+from thinkpol.utils.connection import Connection
 import socket
 
 

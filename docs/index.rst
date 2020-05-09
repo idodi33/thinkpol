@@ -10,8 +10,6 @@ Welcome to Thinkpol's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: thinkpol.client.client
-    :members:
 
 
 Indices and tables

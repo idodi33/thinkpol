@@ -1,6 +1,6 @@
 import struct
 from datetime import datetime
-from reader.reader_drivers import drivers
+from thinkpol.reader.reader_drivers import drivers
 
 _USR_FORMAT = "user {0}: {1}, born {2} ({3})"
 

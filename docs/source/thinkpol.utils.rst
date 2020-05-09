@@ -20,13 +20,6 @@ thinkpol.utils.listener module
    :undoc-members:
    :show-inheritance:
 
-thinkpol.utils.protocol module
-------------------------------
-
-.. automodule:: thinkpol.utils.protocol
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 thinkpol.utils.snapshot module
 ------------------------------
