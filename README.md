@@ -1,6 +1,7 @@
-# Thinkpol
-My final project in the course 'Advanced System Design'. See [full documentation](https://thinkpol.readthedocs.io/en/latest/?).
+# Thinkpol [![Build Status](https://travis-ci.org/idodi33/Thinkpol.svg?branch=master)](https://travis-ci.org/idodi33/Thinkpol) [![Documentation Status](https://readthedocs.org/projects/thinkpol/badge/?version=latest)](https://thinkpol.readthedocs.io/en/latest/?badge=latest)
 
+
+My final project in the course 'Advanced System Design'. See [full documentation](https://thinkpol.readthedocs.io/en/latest/?).
 ## Installation
 
 1. Clone the repository and enter it:
