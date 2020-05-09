@@ -1,0 +1,8 @@
+python:
+   install:
+      - requirements: requirements.txt
+   system_packages: true
+
+sphinx:
+  builder: html
+  configuration: conf.py
