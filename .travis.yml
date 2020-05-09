@@ -19,4 +19,5 @@ after_success:
 
 
 script:
-- bundle exec rake test
+- pytest --cov-report term --cov=thinkpol tests/
+
