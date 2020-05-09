@@ -3,7 +3,7 @@ import struct
 import gzip
 from datetime import datetime
 from thinkpol.protobufs import cortex_pb2
-from thinkpol import reader
+from thinkpol.reader.reader import Reader
 import tester_utils as tu
 import time
 import os
@@ -100,9 +100,9 @@ def userfile(request, tmp_path):
 
 def test_reader(userfile):
 	if userfile.name.endswith(".gz"):
-		r = reader.Reader(userfile, "protobuf")
+		r = Reader(userfile, "protobuf")
 	else:
-		r = reader.Reader(userfile, "binary")
+		r = Reader(userfile, "binary")
 	assert r.user_id == tu._USER_ID
 	assert r.user_name == tu._USERNAME
 	assert r.birth_date == tu._BIRTHDAY

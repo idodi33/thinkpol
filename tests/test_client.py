@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime
 from thinkpol.utils import  connection
-from thinkpol import reader
+import thinkpol.reader.reader as rd
 from thinkpol.protobufs import cortex_pb2
 from thinkpol.protobufs import config_pb2
 from thinkpol.client import client
@@ -12,7 +12,7 @@ import time
 
 @pytest.fixture
 def mock_reader(monkeypatch):
-    monkeypatch.setattr(reader, 'Reader', MockReader)
+    monkeypatch.setattr(rd, 'Reader', MockReader)
 
 
 class MockReader:
