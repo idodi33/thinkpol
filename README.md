@@ -71,42 +71,42 @@ The client reads files and uploads them to a server. The client can either accep
 
 The client is available as `thinkpol.client` and exposes the following API:
 
-    ```pycon 
-    >>> from cortex.client import upload_sample
-    >>> upload_sample(host='127.0.0.1', port=8000, path='sample.mind.gz')
-    … # upload path to host:port
-    ```
+```pycon 
+>>> from cortex.client import upload_sample
+>>> upload_sample(host='127.0.0.1', port=8000, path='sample.mind.gz')
+… # upload path to host:port
+```
    
 As well as the following CLI: 
 
-    ```sh 
-    python -m cortex.client upload-sample \
-      -h/--host '127.0.0.1'             \   # '127.0.0.1' is the default host
-      -p/--port 8000                    \   # 8000 is the default port
-      'snapshot.mind.gz'
-    ```
+```sh 
+python -m cortex.client upload-sample \
+  -h/--host '127.0.0.1'             \   # '127.0.0.1' is the default host
+  -p/--port 8000                    \   # 8000 is the default port
+  'snapshot.mind.gz'
+```
 
 ### The Server
 The server accepts connections from clients, receives uploaded samples and publishes them to a publishing function. The default publishing function sends the samples to a message queue.
 
 The server is available as `thinkpol.server` and exposes the following API:
 
-    ```pycon 
-    >>> from cortex.server import run_server
-    >>> def print_message(message):
-    ...     print(message)
-    >>> run_server(host='127.0.0.1', port=8000, publish=print_message)
-    … # listen on host:port and pass received messages to publish
-    ```
+```pycon 
+>>> from cortex.server import run_server
+>>> def print_message(message):
+...     print(message)
+>>> run_server(host='127.0.0.1', port=8000, publish=print_message)
+… # listen on host:port and pass received messages to publish
+```
     
 The server also exposes the following CLI (the message queue url is of the form `scheme://host:port`):
 
-    ```sh 
-    $ python -m cortex.server run-server \
-      -h/--host '127.0.0.1'          \  # '127.0.0.1' is the default port
-      -p/--port 8000                 \  # 8000 is the default port
-      'rabbitmq://127.0.0.1:5672/'
-    ```
+```sh 
+$ python -m cortex.server run-server \
+  -h/--host '127.0.0.1'          \  # '127.0.0.1' is the default port
+  -p/--port 8000                 \  # 8000 is the default port
+  'rabbitmq://127.0.0.1:5672/'
+```
     
 ### The Parsers
 The parsers consume samples from a message queue, parse it in various ways, and publish back the processed results. 
@@ -114,9 +114,9 @@ There are currently parsers for 4 parts of the snapshot: `depth_image`, `color_i
 
 The parsers are available in `thinkpol.parsers` and expose the following API:
 
-    ```pycon
-    >>> from cortex.parsers import run_parser
-    >>> data = … 
-    >>> result = run_parser('pose', data)
-    ```
+```pycon
+>>> from cortex.parsers import run_parser
+>>> data = … 
+>>> result = run_parser('pose', data)
+```
     
