@@ -120,12 +120,14 @@ class Snapshot:
 		:returns: the new snapshot
 		:rtype: Snapshot
 		"""
+		print("snapshot: started from_proto_stream")
 		message_len = int.from_bytes(
 			stream.read(4), 
 			byteorder="little"
 			)
 		snp = cortex_pb2.Snapshot()
 		snp.ParseFromString(stream.read(message_len))
+		print("snapshot: parsed protobuf from string")
 		datetime = snp.datetime
 		translation = (
 			snp.pose.translation.x, 

@@ -1,6 +1,5 @@
 import furl
-from sql_driver import sql_driver as sqd
-from mdb_driver import mdb_driver as mdb
+from thinkpol.mdb_driver import mdb_driver as mdb
 
 
 class Saver:

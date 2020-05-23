@@ -9,10 +9,10 @@ function Snapshot(props) {
 	console.log("User component loaded.")
 	var userID = props.match.params.userID;
   var snapshotID = props.match.params.snapshotID;
-  var resultURL = 'http://127.0.0.1:5000' + "/users/" + userID + "/snapshots/" + snapshotID + "/";
+  var resultURL = window.api_url + "/users/" + userID + "/snapshots/" + snapshotID + "/";
 	return (
 	<div>
-      <SnapshotHeader APIUrl={'http://127.0.0.1:5000'} userID={userID} snapshotID={snapshotID}/>
+      <SnapshotHeader APIUrl={window.api_url} userID={userID} snapshotID={snapshotID}/>
       <div className='container marketing clearfix  border border-secondary rounded'>
         <Feelings resultURL={resultURL}/>
         <Pose resultURL={resultURL}/>

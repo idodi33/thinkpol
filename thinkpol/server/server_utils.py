@@ -5,6 +5,10 @@ import pathlib
 from thinkpol.parsers import parsers
 
 
+#RAW_DATA_DIR = os.path.join(os.getcwd(), 'raw_data')
+RAW_DATA_DIR = pathlib.Path("opt/thinkpol/raw_data")
+
+
 lock = threading.Lock()
 def save_images(snapshot):
     """
@@ -16,6 +20,7 @@ def save_images(snapshot):
     :returns: a 2-tuple - (color_image_path, depth_image_path)
     :rtype: tuple
     """
+    print(f"save_images: RAW_DATA_DIR is {RAW_DATA_DIR}")
     datetime_obj = datetime.fromtimestamp(
         snapshot.datetime / 1000
         )
@@ -34,7 +39,7 @@ def save_images(snapshot):
         subdir_path_name, 'depth_raw_data'
         )
     depth_file_path = pathlib.Path(depth_file_path_name)
-
+    print(f"save_images: depth_file_path_name is {depth_file_path_name}")
     with lock:
         if not subdir_path.is_dir():
             subdir_path.mkdir(parents=True)

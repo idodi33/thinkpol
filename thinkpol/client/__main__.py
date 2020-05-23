@@ -1,5 +1,5 @@
 import click
-from client import client as cln
+import thinkpol.client as cln
 
 @click.group()
 def cli():

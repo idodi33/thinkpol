@@ -87,7 +87,6 @@ def make_callback_parser(parser, host, port):
 	that receives messages from the message queue, parses them
 	and publishes them to the saver.
 	'''
-	connection = pika.BlockingConnection()
 	connection = pika.BlockingConnection(
 		pika.ConnectionParameters(host=host, port=int(port)))
 	channel = connection.channel()
@@ -119,7 +118,6 @@ def create_saver_consumer(host, port):
 	:rtype: callable
 	"""
 	print("Started creating saver consumer")
-	connection = pika.BlockingConnection()
 	connection = pika.BlockingConnection(
 		pika.ConnectionParameters(host=host, port=port))
 	channel = connection.channel()

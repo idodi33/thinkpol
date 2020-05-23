@@ -10,7 +10,7 @@ class UserBlocks extends Component {
 			return (<p></p>);
 		}
 		var userLis = [];
-
+		console.log(this.props.APIUrl)
 		for(var i = 0; i < IDs.length; i++) {
 			console.log('hey');
 			var li = <UserBlock key={IDs[i]} userID={IDs[i]} url={this.props.APIUrl}/>;

@@ -1,0 +1,11 @@
+data
+docs
+tests
+parsed_data
+raw_data
+sample.mind
+sample.mind.gz
+.pytest_cache
+__pycache__
+.git
+.env

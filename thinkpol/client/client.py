@@ -32,4 +32,5 @@ def upload_sample(host, port, path):
 	for snapshot in r:
 		time.sleep(0.5)
 		send_snapshot(user_msg, snapshot, host, port)
+	print('done!')
 

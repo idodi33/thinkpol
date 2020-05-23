@@ -1,6 +1,6 @@
 import click
 import furl
-from saver.saver import Saver
+from thinkpol.saver.saver import Saver
 from thinkpol.message_queue.rabbitmq_driver import create_saver_consumer
 from thinkpol.parsers import parsers
 

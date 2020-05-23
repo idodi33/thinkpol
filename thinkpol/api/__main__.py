@@ -1,6 +1,6 @@
 import click
 import furl
-from api import run_api_server
+from thinkpol.api import run_api_server
 
 
 @click.group()

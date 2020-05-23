@@ -1,5 +1,6 @@
 import threading
 from thinkpol.server.server_utils import save_images, available_fields, filter_dict, make_snapshot_dict
+from thinkpol.parsers import parsers
 from thinkpol.utils import listener as lsn
 from thinkpol.utils import snapshot as snp
 from thinkpol.protobufs import cortex_pb2

@@ -6,10 +6,10 @@ function User(props) {
 	var userID = props.match.params.userID;
 	return (
 	<div>
-      <UserHeader APIUrl={'http://127.0.0.1:5000'} userID={userID}/>
+      <UserHeader APIUrl={window.api_url} userID={userID}/>
       <div className='container marketing'>
         <div className='row'>
-    	  <SnapshotBlocks APIUrl={'http://127.0.0.1:5000'} userID={userID}/>
+    	  <SnapshotBlocks APIUrl={window.api_url} userID={userID}/>
         </div>
       </div>
   	</div>)

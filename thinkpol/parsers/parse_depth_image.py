@@ -29,6 +29,7 @@ def parse_depth_image(snapshot, data_dir=None):
 	else:
 		depth_file_path = get_file_path(snapshot, 'depth')	
 	raw_file_path = pathlib.Path(js['depth_image'])		# path of the file that contains the raw data
+	print(f"parse_depth_image: raw_file_path is {raw_file_path}")
 	data = np.fromfile(raw_file_path, dtype=np.float32)
 	print(f"Size of data array is {len(data)}")
 	size =js['d_height'], js['d_width']

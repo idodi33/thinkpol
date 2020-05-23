@@ -15,8 +15,8 @@ import json
 from datetime import datetime
 
 
-DATA_DIR = os.path.join(os.getcwd(), 'parsed_data')
-
+#DATA_DIR = os.path.join(os.getcwd(), 'parsed_data')
+DATA_DIR = pathlib.Path("opt/thinkpol/parsed_data")
 
 lock = threading.Lock()
 

@@ -40,6 +40,7 @@ class BinaryDriver:
 			self.offset = 17 + name_length
 			return user_id, user_name, birth_date, gender
 
+
 	def get_snap_iterator(self):
 		"""
 		Reads snapshots from the given file iteratively.
@@ -52,3 +53,4 @@ class BinaryDriver:
 			f.seek(file_position, os.SEEK_SET)
 			while f.tell() != file_end:
 				yield Snapshot.from_stream(f)
+

@@ -1,0 +1,83 @@
+version: "3"
+
+services:
+  rabbitmqservice:
+    image: rabbitmq
+    ports: 
+      - 5672:5672
+  mongoservice:
+    image: mongo
+    ports: 
+      - 27017:27017
+    volumes:
+      - mongo_container:/data/db
+  server:
+    image: thinkpol
+    build: .
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    ports: 
+      - 8000:8000
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.server", "run-server", "-h", "0.0.0.0", "rabbitmq://rabbitmqservice:5672"]
+  color-image-parser:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "color_image", "rabbitmq://rabbitmqservice:5672"]
+  depth-image-parser:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "depth_image", "rabbitmq://rabbitmqservice:5672"]
+  feelings-parser:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "feelings", "rabbitmq://rabbitmqservice:5672"]
+  pose-parser:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "pose", "rabbitmq://rabbitmqservice:5672"]
+  saver:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+      - mongoservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "./wait-for-it.sh", "mongoservice:27017", "--", "python", "-m", "thinkpol.saver", "run-saver", "mongodb://mongoservice:27017", "rabbitmq://rabbitmqservice:5672"]
+  api:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - mongoservice
+    ports:
+      - 5000:5000
+    command: ["./wait-for-it.sh", "mongoservice:27017", "--", "python", "-m", "thinkpol.api", "run-server", "-h", "0.0.0.0", "-p", "5000", "-d", "mongodb://mongoservice:27017"]
+  gui:
+    image: gui
+    depends_on:
+      - api
+    build:
+      context: .
+      dockerfile: ./gui/Dockerfile
+    ports:
+      - 8080:8080
+    command: ["./wait-for-it.sh", "api:6543", "--", "python", "-m", "thinkpol.gui", "run-server", "-h", "0.0.0.0", "-H", "0.0.0.0"]
+volumes:
+  mongo_container:
+  data:
+
+

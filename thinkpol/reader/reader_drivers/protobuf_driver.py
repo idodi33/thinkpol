@@ -48,11 +48,19 @@ class ProtobufDriver:
 		"""
 		Reads snapshots from the given file iteratively.
 		"""
+		file_size = os.path.getsize(self.file_name)
 		with gzip.open(self.file_name, 'rb') as f:
+			print("protobuf_driver: opened file")
 			f.read(self.offset)
-			file_position = f.tell()
+			print("protobuf_driver: read self.offset bytes")
+			'''file_position = f.tell()
+			print("1")
 			f.seek(0, os.SEEK_END)
+			print("2")
 			file_end = f.tell()
-			f.seek(file_position, os.SEEK_SET)
-			while f.tell != file_end:
+			print("3")
+			f.seek(file_position, os.SEEK_SET)'''
+			print("protobuf_driver: moved file marker")
+			while f.tell() <= file_size:
 				yield Snapshot.from_proto_stream(f)
+				print("protobuf_driver: yielded snapshot")
