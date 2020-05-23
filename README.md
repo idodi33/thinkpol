@@ -25,7 +25,7 @@ My final project in the course 'Advanced System Design'. See [full documentation
 
 3. Make sure you've installed `docker` and `docker-compose`.
 
-4. To check that everything is working as expected, run a docker of rabbitmq and mongo, and finally run the tests:
+4. To check that everything is working as expected, run a docker of `rabbitmq` and `mongo`, and finally run the tests:
 
     ```sh
     $ sudo docker run -d -p 5672:5672 rabbitmq
@@ -74,7 +74,7 @@ python -m thinkpol.client upload-sample \
 ```
 
 ### The Server
-The server accepts connections from clients, receives uploaded samples and publishes them to a publishing function. The default publishing function sends the samples to a message queue (rabbitmq by default).
+The server accepts connections from clients, receives uploaded samples and publishes them to a publishing function. The default publishing function sends the samples to a message queue (`rabbitmq` by default).
 
 The server is available as `thinkpol.server` and exposes the following API:
 
@@ -129,7 +129,7 @@ In order to add a new parser, place it in a .py file (preferrably named after th
 
 
 ### The Saver
-The saver consumes results from the message queue, as published by the parsers, and saves them to a database (mongodb by default).
+The saver consumes results from the message queue, as published by the parsers, and saves them to a database (`mongodb` by default).
 
 The saver is available as `thinkpol.saver` and exposes the following API:
 
