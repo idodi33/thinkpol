@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/idodi33/Thinkpol.svg?branch=master)](https://travis-ci.org/idodi33/Thinkpol) [![Documentation Status](https://readthedocs.org/projects/thinkpol/badge/?version=latest)](https://thinkpol.readthedocs.io/en/latest/?badge=latest)
+
 # Thinkpol
 
 My final project in the course 'Advanced System Design'. See [full documentation](https://thinkpol.readthedocs.io/en/latest/?).
@@ -47,20 +48,6 @@ First, run the script:
     ```
 
 Now you can [run a client](#the-client) and browse through the data on http://127.0.0.1:8080. 
-
-
-
-The 'Thinkpol' package provides 3 functions that can be called with 'python -m': *upload_thought*, which uploads a thought to the thoughts directory; *run_server*, which runs a server which recieves the thoughts; and *run_webserver*, which displays all thoughts in a webpage.
-
-```sh
-(from the directory that contains 'thinkpol')
-$ python -m thinkpol upload_thought '127.0.0.1:8000' 1 Hi
-* Thinkpol uploads 'Hi' to user-1's directory in the current time subdirectory. Sends the data to 127.0.0.1:8000. *
-$ python -m thinkpol run_server '127.0.0.1:8000' /data
-* Thinkpol recieves data from 127.0.0.1:8000 and stores it in /data. *
-$ python -m thinkpol run_webserver '127.0.0.1:5000' /data
-* Thinkpol displays thoughts from the /data directory in 127.0.0.1:8000. *
-```
 
 ## Modules
 The `thinkpol` package includes a [client](#the-client), which streams cognition snapshots to a [server](#the-server), which then publishes them to a message queue, where multiple [parsers](#the-parsers) read the snapshot, parse various parts of it, and publish the parsed results, which are then [saved](#the-saver) to a database.
