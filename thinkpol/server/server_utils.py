@@ -3,6 +3,7 @@ from datetime import datetime
 import os
 import pathlib
 from thinkpol.parsers import parsers
+import numpy as np
 
 
 #RAW_DATA_DIR = os.path.join(os.getcwd(), 'raw_data')
@@ -50,7 +51,13 @@ def save_images(snapshot):
 
     color_file_path.write_bytes(snapshot.color_image.data)
     depth_file_path.write_bytes(snapshot.depth_image.data)
-    print(f"save_images: size of depth_image.data is {len(snapshot.depth_image.data)}")
+    '''depth_image_data = np.array(snapshot.depth_image.data)
+    print(f"save_images: size of np.array is {depth_image_data.shape}")
+    np.save(str(depth_file_path), depth_image_data)
+    #print(f"save_images: size of depth_image.data is {len(snapshot.depth_image.data)}")
+    with open(depth_file_path, "rb") as f:
+        f.seek(0, os.SEEK_END)
+        print(f"depth file length is {f.tell()}")'''
     return color_file_path_name, depth_file_path_name
 
 

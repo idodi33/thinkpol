@@ -5,6 +5,7 @@ from parsers.parser_utils import get_file_path
 from parsers.parser_utils import extract_metadata
 import json
 import pathlib
+import os
 
 
 def parse_depth_image(snapshot, data_dir=None):
@@ -22,6 +23,7 @@ def parse_depth_image(snapshot, data_dir=None):
 	of the parsed depth image we've saved
 	:rtype: json
 	"""
+
 	js = json.loads(snapshot)
 	if data_dir:
 		# path of the file that will contain the parsed image
@@ -30,15 +32,14 @@ def parse_depth_image(snapshot, data_dir=None):
 		depth_file_path = get_file_path(snapshot, 'depth')	
 	raw_file_path = pathlib.Path(js['depth_image'])		# path of the file that contains the raw data
 	print(f"parse_depth_image: raw_file_path is {raw_file_path}")
+	with open(raw_file_path, "rb") as f:
+		f.seek(0, os.SEEK_END)
+		print(f"depth file length is {f.tell()}")
 	data = np.fromfile(raw_file_path, dtype=np.float32)
 	print(f"Size of data array is {len(data)}")
 	size =js['d_height'], js['d_width']
 	data_matrix = np.reshape(data, size)
-	plt.imshow(
-		data_matrix, 
-		cmap='hot', 
-		interpolation='nearest'
-		)
+	plt.imshow(data_matrix, cmap='hot', interpolation='nearest')
 	print(f"Depth file path is {depth_file_path}")
 	plt.savefig(depth_file_path)
 	json_parsed = extract_metadata(js)

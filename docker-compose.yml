@@ -28,7 +28,35 @@ services:
     depends_on:
       - rabbitmqservice
     command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "color_image", "rabbitmq://rabbitmqservice:5672"]
-  depth-image-parser:
+  depth-image-parser-1:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "depth_image", "rabbitmq://rabbitmqservice:5672"]
+  depth-image-parser-2:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "depth_image", "rabbitmq://rabbitmqservice:5672"]
+  depth-image-parser-3:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "depth_image", "rabbitmq://rabbitmqservice:5672"]
+  depth-image-parser-4:
+    image: thinkpol
+    volumes:
+      - data:/opt/thinkpol
+    depends_on:
+      - rabbitmqservice
+    command: ["./wait-for-it.sh", "rabbitmqservice:5672", "--", "python", "-m", "thinkpol.parsers", "run-parser", "depth_image", "rabbitmq://rabbitmqservice:5672"]
+  depth-image-parser-5:
     image: thinkpol
     volumes:
       - data:/opt/thinkpol
@@ -75,7 +103,7 @@ services:
       dockerfile: ./gui/Dockerfile
     ports:
       - 8080:8080
-    command: ["./wait-for-it.sh", "api:6543", "--", "python", "-m", "thinkpol.gui", "run-server", "-h", "0.0.0.0", "-H", "0.0.0.0"]
+    command: ["./wait-for-it.sh", "api:5000", "--", "python", "-m", "thinkpol.gui", "run-server", "-h", "0.0.0.0", "-H", "0.0.0.0"]
 volumes:
   mongo_container:
   data:

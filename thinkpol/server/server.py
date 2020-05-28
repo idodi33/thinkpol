@@ -8,7 +8,7 @@ from thinkpol.protobufs import config_pb2
 import json
 import os
 
-RAW_DATA_DIR = os.path.join(os.getcwd(), 'raw_data')
+
 KILLED = False
 
 
@@ -67,6 +67,7 @@ class Handler(threading.Thread):
         snapshot_msg = self.connection.receive_message()
         snapshot = snp.Snapshot.from_bytes(snapshot_msg)
 
+        print(f"server: snapshot depth_image size is {len(snapshot.depth_image.data)}")
         c_path, d_path = save_images(snapshot)
         snapshot_dict = make_snapshot_dict(
             user, snapshot, c_path, d_path

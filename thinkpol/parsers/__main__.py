@@ -15,7 +15,11 @@ def cli():
 @click.argument('url')
 def run_parser(field, url):
     consume = parse_url(url)
-    consume(parsers[field])	# print is temporary, should be redirected to saver
+    while True:
+    	try:
+    		consume(parsers[field])
+    	except Exception as e:
+    		print(e)
 
 
 @cli.command('parse')

@@ -116,8 +116,9 @@ def test_saver_consumer():
 	connection = pika.BlockingConnection(
 		pika.ConnectionParameters(host=tu._HOST, port=tu._MQ_PORT))
 	channel = connection.channel()
+	queue_name = "mock2_save_queue"
 	channel.queue_declare(
-		queue="mock2", durable=True)	# queue is named after the parser
+		queue=queue_name, durable=True)	# queue is named after the parser
 	# uses create_saver_consumer
 	consume = rabbitmq_driver.create_saver_consumer(
 		host=tu._HOST, port=tu._MQ_PORT)
@@ -129,7 +130,7 @@ def test_saver_consumer():
 		print("publishing")
 		#raise Exception(f"test_saver_consumer: tu._JSON['depth_image'] = {json.loads(tu._JSON)['depth_image']}")
 		channel.basic_publish(
-			exchange='', routing_key="mock2", body=tu._JSON)
+			exchange='', routing_key=queue_name, body=tu._JSON)
 		os.wait()
 	else:	# child process
 		print("child here 2")
