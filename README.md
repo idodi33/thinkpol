@@ -41,11 +41,11 @@ The basic functionality of `thinkpol` can be acheived through the `scripts/run-p
 
 First, run the script:
 
-    ```sh
-    $ cd ./scripts
-    $ ./run-pipeline.sh
-    ... # this might take a little while
-    ```
+  ```sh
+  $ cd ./scripts
+  $ ./run-pipeline.sh
+  ... # this might take a little while
+  ```
 
 Now you can [run a client](#the-client) and browse through the data on http://127.0.0.1:8080. 
 
@@ -232,7 +232,7 @@ The GUI consumes the API and reflects it, using `flask` and `react`.
 The GUI is available at `thinkpol.gui` and exposes the following API:
 
 ```pycon
->>> from cortex.gui import run_server
+>>> from thinkpol.gui import run_server
 >>> run_server(
 ...     host = '127.0.0.1',
 ...     port = 8080,
@@ -244,7 +244,7 @@ The GUI is available at `thinkpol.gui` and exposes the following API:
 As well as the following CLI:
 
 ```sh
-$ python -m cortex.gui run-server \
+$ python -m thinkpol.gui run-server \
       -h/--host '127.0.0.1'       \     # '127.0.0.1' is the default gui host
       -p/--port 8080              \     # 8080 is the default gui port
       -H/--api-host '127.0.0.1'   \     # '127.0.0.1' is the default api host

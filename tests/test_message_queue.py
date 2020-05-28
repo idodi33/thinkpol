@@ -72,7 +72,7 @@ def test_server_publisher():
 		print("child here")
 		channel.start_consuming() 
 
-'''
+
 def test_parser_consumer():
 	# simulates server publishing
 	serv_connection = pika.BlockingConnection(
@@ -108,7 +108,7 @@ def test_parser_consumer():
 			os.wait()
 		else:	# grandchild process
 			save_channel.start_consuming()
-'''
+
 
 def test_saver_consumer():
 	# simulates parser publishing
