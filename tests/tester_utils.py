@@ -5,6 +5,7 @@ from pathlib import Path
 from thinkpol.utils.snapshot import Snapshot, ImageData
 
 _IMAGES_DIR = Path(__file__).absolute().parent / 'test_data'
+_SERVER_IMAGES_DIR = _IMAGES_DIR / 'server_data'
 _HOST = '127.0.0.1'
 _PORT = 8000
 _MQ_PORT = 5672
@@ -63,6 +64,8 @@ _SNAPSHOT = Snapshot(_DATETIME,
     _THIRST,
     _EXHAUSTION,
     _HAPPINESS)
+_SAVE_IMAGES_TUPLE = ('/home/user/thinkpol/tests/test_data/server_data/2019-12-04_10-08-08-608000/color_raw_data',
+     '/home/user/thinkpol/tests/test_data/server_data/2019-12-04_10-08-08-608000/depth_raw_data')
 server_gender_dict = {"m": "man", "f": "woman", "o": "other"}
 _DICT = {
             'user_id' : _USER_ID,

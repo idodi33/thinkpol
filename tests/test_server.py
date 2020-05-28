@@ -5,6 +5,8 @@ from thinkpol.protobufs import cortex_pb2
 from thinkpol.protobufs import config_pb2
 from thinkpol.parsers import parsers
 from thinkpol.server import server
+from thinkpol.server import server_utils
+import time
 
 
 @pytest.fixture
@@ -72,5 +74,27 @@ class MockConnection:
     def close(self):
         pass
 
+
+@pytest.fixture
+def mock_data_dir(monkeypatch):
+    monkeypatch.setattr(server_utils, 'RAW_DATA_DIR', tu._SERVER_IMAGES_DIR)
+
+
 def test_server(mock_listener):
     server.run_server(tu._HOST, tu._PORT, lambda x: x)
+
+
+def test_server_utils(mock_data_dir):
+    user = cortex_pb2.User(
+    user_id = tu._USER_ID,
+    username = tu._USERNAME,
+    birthday = tu._BIRTHDAY,
+    gender = gender_dict[tu._GENDER]
+    )
+    c_path, d_path = server_utils.save_images(tu._SNAPSHOT)
+    assert (c_path, d_path) == tu._SAVE_IMAGES_TUPLE
+    snapshot_dict = server_utils.make_snapshot_dict(user, tu._SNAPSHOT, c_path, d_path)
+    snapshot_dict['color_image'] = tu._C_PATH
+    snapshot_dict['depth_image'] = tu._D_PATH
+    assert snapshot_dict == tu._DICT
+    assert server_utils.filter_dict(snapshot_dict) == tu._DICT
