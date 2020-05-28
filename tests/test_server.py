@@ -85,6 +85,9 @@ def test_server(mock_listener):
 
 
 def test_server_utils(mock_data_dir):
+    """
+    This tests functions in server_utils such as save_images.
+    """
     user = cortex_pb2.User(
     user_id = tu._USER_ID,
     username = tu._USERNAME,
