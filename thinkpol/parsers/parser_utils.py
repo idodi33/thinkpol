@@ -35,7 +35,6 @@ def get_file_path(snapshot, type, data_dir=DATA_DIR):
 	:rtype: str
 	:raises: ValueError
 	"""
-	print(f"get_file_path: data_dir is {data_dir}")
 	json_snap = json.loads(snapshot)
 	datetime_obj = datetime.fromtimestamp(json_snap['datetime'] / 1000)
 	formatted_time = datetime.strftime( datetime_obj, "%Y-%m-%d_%H-%M-%S-%f")

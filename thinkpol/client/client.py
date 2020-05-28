@@ -17,13 +17,11 @@ def upload_sample(host, port, path):
 	:param path: the path of the file we process
 	:type path: str
 	"""
-	print("Started upload_sample")
 	address = (host, port)
 	if path.endswith('.gz'):
 		r = reader.Reader(path, 'protobuf')
 	else:
 		r = reader.Reader(path, 'binary')
-	print("finished reading")
 	user_msg = get_user_msg(r)
 	if type(address) == str:
 		host, port = address.split(':')
@@ -32,5 +30,4 @@ def upload_sample(host, port, path):
 	for snapshot in r:
 		time.sleep(0.5)
 		send_snapshot(user_msg, snapshot, host, port)
-	print('done!')
 

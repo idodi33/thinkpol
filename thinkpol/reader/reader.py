@@ -17,7 +17,6 @@ class Reader:
 	"""
 
 	def __init__(self, file_name, format):
-		print("Currently reading file")
 		self.format = format
 		if format in drivers:
 			driver = drivers[format](file_name)
@@ -26,7 +25,6 @@ class Reader:
 		self.user_id, self.user_name, self.birth_date, \
 		self.gender, = driver.get_user_info()
 		self.snapshots_iterator = driver.get_snap_iterator()
-		print("Done with reader init")
 
 	def __str__(self):
 		dttime = datetime.fromtimestamp(self.birth_date)

@@ -27,16 +27,13 @@ class BinaryDriver:
 		:rtype: tuple
 		"""
 		with open(self.file_name, 'rb') as f:
-			print("started parsing user info")
 			user_id, name_length = struct.unpack("QI", f.read(12))
 			encoded_user_name = f.read(name_length)
-			print("Reading user info some more")
 			user_name = encoded_user_name.decode("utf-8")
 			birth_date = struct.unpack("I", f.read(4))[0]
 			gender_dict = {'m':0, 'f':1, 'o': 2}
 			gender_char = f.read(1).decode("utf-8")
 			gender = gender_dict[gender_char]
-			print("Readinggg")
 			self.offset = 17 + name_length
 			return user_id, user_name, birth_date, gender
 

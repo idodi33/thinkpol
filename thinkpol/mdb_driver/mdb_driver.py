@@ -29,7 +29,6 @@ class DataBase:
 		:raises: ValueError
 		"""
 		data = json.loads(data)
-		print(f"mdb_driver: data to be saved is {data}")
 		self.users.update_one({'user_id': data['user_id']},
 			{'$set': {'user_id': data['user_id'],
 			'username': data['username'],
@@ -69,7 +68,6 @@ class DataBase:
 		self.snapshots.update_one(
 			{'datetime': data['datetime']}, data_dict, True	# upsert
 			)
-		print("mdb_driver: saved message")
 
 
 	def find(self, request, user_id=None, snapshot_id=None, result_name=None):

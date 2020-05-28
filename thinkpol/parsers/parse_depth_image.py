@@ -31,16 +31,10 @@ def parse_depth_image(snapshot, data_dir=None):
 	else:
 		depth_file_path = get_file_path(snapshot, 'depth')	
 	raw_file_path = pathlib.Path(js['depth_image'])		# path of the file that contains the raw data
-	print(f"parse_depth_image: raw_file_path is {raw_file_path}")
-	with open(raw_file_path, "rb") as f:
-		f.seek(0, os.SEEK_END)
-		print(f"depth file length is {f.tell()}")
 	data = np.fromfile(raw_file_path, dtype=np.float32)
-	print(f"Size of data array is {len(data)}")
 	size =js['d_height'], js['d_width']
 	data_matrix = np.reshape(data, size)
 	plt.imshow(data_matrix, cmap='hot', interpolation='nearest')
-	print(f"Depth file path is {depth_file_path}")
 	plt.savefig(depth_file_path)
 	json_parsed = extract_metadata(js)
 	json_parsed['depth_image'] = str(depth_file_path)

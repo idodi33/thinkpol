@@ -91,7 +91,6 @@ class Snapshot:
 		translation = struct.unpack("ddd", stream.read(24))	# A 3-tuple.
 		rotation = struct.unpack("dddd", stream.read(32))	# A 4-tuple.
 		c_height, c_width = struct.unpack("II", stream.read(8))
-		print("Reading bgr image.")
 		bgr = read_data(stream, 3 * c_height * c_width)
 		# We need to flip the image data from bgr to rgb
 		temp_image = Image.frombytes('RGB', (c_width, c_height), bgr)
@@ -101,7 +100,6 @@ class Snapshot:
 		color_image = ImageData("color", c_width, c_height, rgb)
 		d_height, d_width = struct.unpack("II", stream.read(8))
 		depths = read_data(stream, 4 * d_height * d_width)
-		print(f"Size of depth_image data is {len(depths)}")
 		depth_image = ImageData("depth", d_width, d_height, depths)
 		hunger, thirst = struct.unpack("ff", stream.read(8))
 		exhaustion, happiness = struct.unpack("ff", stream.read(8))
@@ -120,14 +118,12 @@ class Snapshot:
 		:returns: the new snapshot
 		:rtype: Snapshot
 		"""
-		print("snapshot: started from_proto_stream")
 		message_len = int.from_bytes(
 			stream.read(4), 
 			byteorder="little"
 			)
 		snp = cortex_pb2.Snapshot()
 		snp.ParseFromString(stream.read(message_len))
-		print("snapshot: parsed protobuf from string")
 		datetime = snp.datetime
 		translation = (
 			snp.pose.translation.x, 
@@ -151,7 +147,6 @@ class Snapshot:
 		d_height = snp.depth_image.height
 		depths = struct.pack(f"{len(snp.depth_image.data)}f",
 			*snp.depth_image.data)
-		print(f"len of depths is {len(depths)}")
 		depth_image = ImageData(
 			'depth', snp.depth_image.width,
 			snp.depth_image.height, depths
@@ -217,9 +212,7 @@ class Snapshot:
 			msg += struct.pack("II", 0, 0)
 		if "depth_image" in fields:
 			msg += struct.pack("II", self.d_height, self.d_width)
-			data = self.depth_image.data[:] # Protobuf lists are very weird :P
-			print(f"type of self.depth_image.data: {type(self.depth_image.data)}")
-			#msg += struct.pack('%sf' % len(data), *data)
+			data = self.depth_image.data[:] # Protobuf lists are weird :P
 			msg += data
 		else:
 			msg += struct.pack("II", 0, 0)
@@ -256,11 +249,9 @@ def read_data(stream, size):
 	:returns: the binary data we've just read
 	:rtype: bytes
 	"""
-	print(f"I have to read {size} bytes of data.")
 	size_left = size
 	data = b''
 	while size_left >= 1000000:
-		#print("Just read a 1000000 bytes.")
 		data += stream.read(1000000)
 		size_left -= 1000000
 	data += stream.read(size_left)

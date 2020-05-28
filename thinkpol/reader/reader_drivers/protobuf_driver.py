@@ -39,9 +39,6 @@ class ProtobufDriver:
 			user_name = user.username
 			birth_date = user.birthday
 			gender = user.gender
-			#gender_dict = {0: "man", 1: "woman", 2: "other"}
-			#gender = gender_dict[user.gender]
-			print(f"Gender is {gender}")
 			self.offset = message_size + 4
 			return user_id, user_name, birth_date, gender
 
@@ -49,21 +46,12 @@ class ProtobufDriver:
 		"""
 		Reads snapshots from the given file iteratively.
 		"""
-		#file_size = os.path.getsize(self.file_name)
 		with open(self.file_name, 'rb') as f:
 			f.seek(-4, 2)
 			file_end = struct.unpack('I', f.read(4))[0]
-			'''
-			file_position = f.tell()
-			print("1")
-			f.seek(0, os.SEEK_END)
-			print("2")
-			file_end = f.tell()
-			'''
 
 		count = 0
 		with gzip.open(self.file_name, 'rb') as f:
-			print("protobuf_driver: opened file")
 			f.read(self.offset)
 			while f.tell() < file_end - 8:
 				yield Snapshot.from_proto_stream(f)

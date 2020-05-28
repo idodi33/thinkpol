@@ -21,7 +21,6 @@ def save_images(snapshot):
     :returns: a 2-tuple - (color_image_path, depth_image_path)
     :rtype: tuple
     """
-    print(f"save_images: RAW_DATA_DIR is {RAW_DATA_DIR}")
     datetime_obj = datetime.fromtimestamp(
         snapshot.datetime / 1000
         )
@@ -40,7 +39,6 @@ def save_images(snapshot):
         subdir_path_name, 'depth_raw_data'
         )
     depth_file_path = pathlib.Path(depth_file_path_name)
-    print(f"save_images: depth_file_path_name is {depth_file_path_name}")
     with lock:
         if not subdir_path.is_dir():
             subdir_path.mkdir(parents=True)
@@ -51,13 +49,6 @@ def save_images(snapshot):
 
     color_file_path.write_bytes(snapshot.color_image.data)
     depth_file_path.write_bytes(snapshot.depth_image.data)
-    '''depth_image_data = np.array(snapshot.depth_image.data)
-    print(f"save_images: size of np.array is {depth_image_data.shape}")
-    np.save(str(depth_file_path), depth_image_data)
-    #print(f"save_images: size of depth_image.data is {len(snapshot.depth_image.data)}")
-    with open(depth_file_path, "rb") as f:
-        f.seek(0, os.SEEK_END)
-        print(f"depth file length is {f.tell()}")'''
     return color_file_path_name, depth_file_path_name
 
 

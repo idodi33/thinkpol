@@ -24,7 +24,6 @@ def run_server(host, port, publish):
     :param publish: the function to which we publish the data
     :type publish: callable
     """
-    print("started run_server")
     with lsn.Listener(int(port), host, 1000, True) as listener:
         while not KILLED:
             # client is a connection object
@@ -52,7 +51,6 @@ class Handler(threading.Thread):
         """
         Handles one client's request and opens/edits a corresponding file.
         """
-        print("Started handling a client.")
         global KILLED
         user_msg = self.connection.receive_message()
         if user_msg == "kill":
@@ -67,15 +65,12 @@ class Handler(threading.Thread):
         snapshot_msg = self.connection.receive_message()
         snapshot = snp.Snapshot.from_bytes(snapshot_msg)
 
-        print(f"server: snapshot depth_image size is {len(snapshot.depth_image.data)}")
         c_path, d_path = save_images(snapshot)
         snapshot_dict = make_snapshot_dict(
             user, snapshot, c_path, d_path
             )
         json_dict = filter_dict(snapshot_dict)
-        print(f"json_dict for this snapshot is {json_dict}")
         json_data = json.dumps(json_dict)
         self.publish(json_data)
-        print("closing connection")
         self.connection.close()
 

@@ -38,15 +38,11 @@ def send_snapshot(user_msg, snapshot, host, port):
 	:type port: str
 	"""
 	with cn.Connection.connect(host, int(port)) as connection:
-		print("Started connection")
 		connection.send_message(user_msg)
-		print("Sent user message")
 		config_msg = connection.receive_message()
-		print("Received config message")
 		config = config_pb2.Config()
 		config.ParseFromString(config_msg)
 		snapshot_msg = snapshot.serialize_request(
 			config.fields
 			)
 		connection.send_message(snapshot_msg)
-		print(f"fields sent are {config.fields}")

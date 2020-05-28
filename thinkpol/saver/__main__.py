@@ -17,7 +17,6 @@ def run_saver(db_url, mq_url):
     s = Saver(db_url)
     consume = parse_mq_url(mq_url)
     fields = parsers.keys()
-    print(f" saving {fields}")
     consume(fields, s)
 
 
