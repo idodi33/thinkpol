@@ -26,6 +26,9 @@ class MockDB:
 
 
 class MockAPI:
+	'''
+    This replaces the normal API class api.py uses.
+	'''
 	host = "0.0.0.0"
 	port = 5000
 	database = MockDB()
