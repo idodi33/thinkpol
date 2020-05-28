@@ -36,6 +36,7 @@ My final project in the course 'Advanced System Design'. See [full documentation
     $ pytest tests/
     ...
     ```
+  Note: Depending on your machine, you might have to run the tests once or twice before the message queue starts working properly.
 
 ## Usage
 The basic functionality of `thinkpol` can be acheived through the `scripts/run-pipeline.sh` script. This launches all of the project's components and allows you to upload a file using a client and view its contents by browsing to a gui server.
