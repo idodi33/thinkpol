@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/idodi33/Thinkpol.svg?branch=master)](https://travis-ci.org/idodi33/Thinkpol) [![Documentation Status](https://readthedocs.org/projects/thinkpol/badge/?version=latest)](https://thinkpol.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.org/idodi33/Thinkpol.svg?branch=master)](https://travis-ci.org/idodi33/Thinkpol) [![Documentation Status](https://readthedocs.org/projects/thinkpol/badge/?version=latest)](https://thinkpol.readthedocs.io/en/latest/?badge=latest) [![codecov](https://codecov.io/gh/idodi33/Thinkpol/branch/master/graph/badge.svg)](https://codecov.io/gh/idodi33/Thinkpol)
+
 
 # Thinkpol
 
