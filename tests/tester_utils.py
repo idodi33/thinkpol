@@ -18,7 +18,6 @@ _USERNAME = "Anony Mous"
 _BIRTHDAY = int(datetime(year=2000, month=1, day=1).timestamp())
 _GENDER = "o"
 _DATETIME = int(datetime.strptime("2019-12-04_10-08-08-608000", "%Y-%m-%d_%H-%M-%S-%f").timestamp() * 1000)
-print(f"_DATETIME: {_DATETIME}")
 #_DATETIME = int(datetime(year=2020, month=1, day=1).timestamp() * 1000)
 _TRANSLATION_X = -1.5
 _TRANSLATION_Y = -1.0
@@ -86,6 +85,14 @@ _DICT = {
             'exhaustion' : _EXHAUSTION,
             'happiness' : _HAPPINESS
         }
+
+_USER_DICT = {
+            'user_id' : _USER_ID,
+            'username' : _USERNAME,
+            'birthday' : _BIRTHDAY,
+            'gender' : server_gender_dict[_GENDER]
+}
+
 _JSON = json.dumps(_DICT)
 
 _D_IMAGE_JSON = json.dumps({
