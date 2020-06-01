@@ -10,9 +10,9 @@ My final project in the course 'Advanced System Design'. See [full documentation
 1. Clone the repository and enter it:
 
     ```sh
-    $ git clone git@github.com:idodi33/Thinkpol.git
+    $ git clone git@github.com:idodi33/thinkpol.git
     ...
-    $ cd Thinkpol/
+    $ cd thinkpol/
     ```
 
 2. Run the installation script and activate the virtual environment:
@@ -21,7 +21,7 @@ My final project in the course 'Advanced System Design'. See [full documentation
     $ ./scripts/install.sh
     ...
     $ source .env/bin/activate
-    [Thinkpol] $ # you're good to go!
+    [thinkpol] $ # you're good to go!
     ```
 
 3. Make sure you've installed `docker` and `docker-compose`.
